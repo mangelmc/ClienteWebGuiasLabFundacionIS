@@ -10,6 +10,8 @@ const cursosRouter = require('./routes/cursos');
 const estudiantesRouter = require('./routes/estudiantes');
 const guiasRouter = require('./routes/guias');
 const homeRouter = require('./routes/home');
+const laboratoriosRouter = require('./routes/laboratorios');
+
 var app = express();
 
 
@@ -26,14 +28,12 @@ app.set('port', process.env.PORT ||4000);
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-
-
-
 app.use('/', indexRouter);
 app.use('/cursos', cursosRouter);
 app.use('/estudiantes', estudiantesRouter);
 app.use('/guias', guiasRouter);
 app.use('/home', homeRouter);
+app.use('/laboratorios', laboratoriosRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -52,7 +52,7 @@ app.use(function(err, req, res, next) {
 });
 
 app.listen(app.get('port'),()=>{
-    console.log(`servidor Web en puerto ${app.get('port')}`)
+    console.log(`Servidor Web corriendo en el puerto ${app.get('port')}`)
 });
 
 module.exports = app;

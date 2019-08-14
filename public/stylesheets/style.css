@@ -6,3 +6,7 @@ body {
 a {
   color: #00B7FF;
 }
+
+.swal2-popup {
+  font-size: 1.6rem !important;
+}

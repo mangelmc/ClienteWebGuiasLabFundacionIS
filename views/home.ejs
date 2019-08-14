@@ -22,7 +22,9 @@
   </header>
   <!-- Left side column. contains the logo and sidebar -->
   <aside class="main-sidebar">
-    <%-include("partials/sidebar") -%>
+    
+      <%-include('partials/sidebar',{docente: query.docente}); -%>
+    
   </aside>
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -39,9 +41,6 @@
     
     <!-- Main content -->
     <section class="content container-fluid">
-      <!--------------------------
-        | Your Page Content Here |
-        -------------------------->
       <div class="row">
         <div class="col-xs-12 col-sm-offset-1 col-sm-10 col-md-6 col-lg-offset-1  col-lg-5 col-md-offset-0">
           
@@ -53,7 +52,7 @@
             <div class="icon">
               <i class="fas fa-chalkboard-teacher"></i>
             </div>
-            <a href="/cursos" class="small-box-footer h4">
+            <a href="/cursos?docente=<%= query.docente%>" class="small-box-footer h4">
               VER DETALLES <i class="fa fa-chevron-circle-right"></i>
             </a>
           </div>
@@ -67,7 +66,7 @@
             <div class="icon">
               <i class="fas fa-users"></i>
             </div>
-            <a href="/estudiantes" class="small-box-footer h4">
+            <a href="/estudiantes?docente=<%= query.docente%>" class="small-box-footer h4">
               VER DETALLES <i class="fas fa-chevron-circle-right"></i>
             </a>
           </div>
@@ -82,7 +81,7 @@
             <div class="icon">
               <i class="fas fa-book"></i>
             </div>
-            <a href="/guias" class="small-box-footer h4">
+            <a href="/guias?docente=<%= query.docente%>" class="small-box-footer h4">
               VER DETALLES <i class="fas fa-chevron-circle-right"></i>
             </a>
           </div>

@@ -19,7 +19,7 @@
   </header>
   <!-- Left side column. contains the logo and sidebar -->
   <aside class="main-sidebar">
-      <%-include("partials/sidebar") -%>
+      <%-include("partials/sidebar",{docente: query.docente}) -%>
   </aside>
 
   <!-- Content Wrapper. Contains page content -->
@@ -32,7 +32,7 @@
           <small>Materia programadas para esta gestión</small>
         </h1>
       <ol class="breadcrumb">
-        <li><a href="/home"><i class="fas fa-home"></i> Inicio</a></li>
+        <li><a href="/home?docente=<%= query.docente%>"><i class="fas fa-home"></i> Inicio</a></li>
         <li class="active"><i class="fas fa-chalkboard"></i> Cursos</li>
       </ol>
     </section>
@@ -40,53 +40,58 @@
     <!-- Main content -->
     <section class="content container-fluid">
 
-      <!--------------------------
-        | Your Page Content Here |
-        -------------------------->
       <div class="row">
+        
+        <%
+        if (result.error != undefined){ %>
+          <div class="error-page">
+            <h2 class="headline text-red">500</h2>
+    
+            <div class="error-content">
+              <h3><i class="fa fa-warning text-red"></i> Oops! Algo va mal.</h3>
+              
+              <p>
+                Descripcion del error : <%= result.error %>
+              </p>
+              <p>
+                Si deseas, puedes <a href="/home?docente=<%= query.docente%>">regresar a la Pagina de inicio</a>
+              </p>                  
+            </div>
+          </div>
+        <%}else{
+          if(result.message ){  %>
+            <div class="callout callout-info">
+              <h4>No existen cursos asignados!</h4>            
+            </div>
+          <%  
+          }
+          else{
+            
+            for(var i = 0,len = result.data.length; i < len;i++){%>
+              <div class="col-lg-3 col-xs-12 col-md-4 col-sm-6">
+                <!-- small box -->
+                <div class="small-box bg-primary ">
+                  <div class="inner text-center">
+                    <h3><%= result.data[i].materia.sigla %></h3>      
+                    <p><%= result.data[i].materia.nombre %></p>
+                    <p>Gestión : <%= result.data[i].gestion %></p>
+    
+                  </div>                  
+                  <a href="/cursos/<%= result.data[i]._id %>?docente=<%= query.docente%>" class="small-box-footer">
+                    VER CURSO <i class="fa fa-arrow-circle-right"></i>
+                  </a>
+                </div>
+              </div>
+              
+          <%}
 
-          <%for(var i = 1; i< 5;i++){%>
-          <div class="col-lg-3 col-xs-12 col-md-4 col-sm-6">
-            <!-- small box -->
-            <div class="small-box bg-primary ">
-              <div class="inner text-center">
-                <h3>SIS-<%=i%>0<%=i%></h3>      
-                <p>Programacón <%=i%></p>
-              </div>                  
-              <a href="/cursos/adv8fdf51vd" class="small-box-footer">
-                VER CURSO <i class="fa fa-arrow-circle-right"></i>
-              </a>
-            </div>
-          </div>
-          <%}%>
-          <%for(var i = 3; i< 7;i++){%>
-          <div class="col-lg-3 col-xs-12 col-md-4 col-sm-6">
-            <!-- small box -->
-            <div class="small-box bg-primary ">
-              <div class="inner text-center">
-                <h3>SIS-<%=i%>01</h3>      
-                <p>Estructura de datos <%=i-2%></p>
-              </div>                  
-              <a href="/cursos/adv8fdf51vd" class="small-box-footer">
-                VER CURSO <i class="fa fa-arrow-circle-right"></i>
-              </a>
-            </div>
-          </div>
-          <%}%>
-          <%for(var i = 6; i< 10;i++){%>
-          <div class="col-lg-3 col-xs-12 col-md-4 col-sm-6">
-            <!-- small box -->
-            <div class="small-box bg-primary ">
-              <div class="inner text-center">
-                <h3>SIS-<%=i%>02></h3>      
-                <p>Seminario <%=i-5 %></p>
-              </div>                  
-              <a href="#" class="small-box-footer">
-                VER CURSO<i class="fa fa-arrow-circle-right"></i>
-              </a>
-            </div>
-          </div>
-          <%}%>
+          }
+        
+        }%>
+      
+        
+        
+          
       </div>
     </section>
     <!-- /.content -->

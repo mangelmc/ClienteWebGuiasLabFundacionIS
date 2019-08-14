@@ -8,6 +8,7 @@
   <title><%= title %></title>
   <%-include("partials/headImports") -%>
   <script src="/adminlte/dist/js/charts.js"></script>
+  <script src="/javascripts/curso.js"></script>
 
 </head>
 
@@ -21,28 +22,26 @@
   </header>
   <!-- Left side column. contains the logo and sidebar -->
   <aside class="main-sidebar">
-    <%-include("partials/sidebar") -%>
+    <%-include("partials/sidebar",{docente: query.docente}) -%>
   </aside>
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
+      
       <h1 >        
-          <span ><i class="fas fa-chalkboard"></i> SIS - 201 </span>  
-          <small>PROGRAMACION 2</small>
+          <span ><i class="fas fa-chalkboard"></i><%= result.materia.sigla%> G<%= result.grupo%></span>  
+          <small><%= result.materia.nombre%>, Gestion <%= result.gestion%></small>
       </h1>
       <ol class="breadcrumb">
-          <li><a href="/home"><i class="fas fa-home"></i> Inicio</a></li>
-        <li><a href="/cursos"><i class="fas fa-chalkboard"></i> Cursos</a></li>
-        <li class="active">SIS-201</li>
+          <li><a href="/home?docente=<%= query.docente%>"><i class="fas fa-home"></i> Inicio</a></li>
+        <li><a href="/cursos?docente=<%= query.docente%>"><i class="fas fa-chalkboard"></i> Cursos</a></li>
+        <li class="active"><%= result.materia.sigla%> G<%= result.grupo%></li>
       </ol>
     </section>
     
     <!-- Main content -->
     <section class="content container-fluid">
-      <!--------------------------
-        | Your Page Content Here |
-        -------------------------->
       <div class="row">
                     
         <div class="col-xs-12">
@@ -52,77 +51,55 @@
               <h2 class="box-title text-bold "><i class="fas fa-users"></i> ESTUDIANTES </h2>
 
               <div class="box-tools pull-right">                  
-                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i>
+                <button type="button" id="estudiantes" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i>
                 </button>
-              </div> 
-                                
-              
-                                
+              </div>            
               <!-- /.box-tools -->
             </div>
             <!-- /.box-header -->
             <div class="box-body" >
-                <div class="box">
-                  <div class="box-header"> 
-                    
-                    <div class="box-tools pull-right">                         
-                      <div class="input-group input-group-sm" style="width: 45vw;">
-                        <div class="input-group-btn ">
-                          <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-expanded="true">Criterio
-                            <span class="fa fa-caret-down"></span></button>
-                          <ul class="dropdown-menu">
-                            <li><a href="#">Nombre</a></li>
-                            <li><a href="#">Apellido</a></li>
-                            <li><a href="#">R. U.</a></li>
-                            
-                            <li><a href="#">C. I.</a></li>
-                          </ul>
-                        </div>
-                        <input type="text" name="table_search" class="form-control pull-right" placeholder="Buscar Estudiante">
-      
-                        <div class="input-group-btn">                            
-                          <button type="submit" class="btn btn-warning"><i class="fas fa-search"></i></button>
-                        </div>
-                        
+              <div class="box">
+                <div class="box-header"> 
+                  
+                  <div class="box-tools pull-right">                         
+                    <div class="input-group input-group-sm" style="width: 45vw;">
+                      <div class="input-group-btn">
+                        <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-expanded="true">Criterio
+                          <span class="fa fa-caret-down"></span></button>
+                        <ul class="dropdown-menu">
+                          <li><a href="#">Nombres y Apellidos</a></li>
+                          <li><a href="#">R. U.</a></li>
+                          <li><a href="#">C. I.</a></li>
+                        </ul>
                       </div>
+                      <input type="text" name="table_search" class="form-control pull-right" placeholder="Buscar Estudiante">
+    
+                      <div class="input-group-btn">                            
+                        <button type="submit" class="btn btn-warning"><i class="fas fa-search"></i></button>
+                      </div>
+                      
                     </div>
-                  </div> 
-                  <!-- /.box-header -->
-                  <div class="box-body">
-                    <table id="example2" class="table table-bordered table-hover table-striped">
-                      <thead>
-                      <tr>
-                        <th>Nombres</th>
-                        <th>Apellidas</th>
-                        <th>RU</th>
-                        <th>CI</th>
-                        <th>Acciones</th>
-                      </tr>
-                      </thead>
-                      <tbody>
-                        <%for(var i = 1; i< 10;i++){%>
-                        <tr>
-                          <td>Nombres</td>
-                          <td>Apellido1 Apellido2</td>
-                          <td>5<%=i%>2<%=i%></td>
-                          <td><%=i%>2<%=i%>3<%=i%>2<%=i%>3</td>
-                          <td>
-                            
-                            <a href="/estudiantes/as2msdkm3m4" type="button" class="btn  btn-success btn-sm">
-                              <i class="fas fa-info" ></i>
-                            </a>
-                            <button type="button" class="btn  btn-danger btn-sm">
-                                <i class="fas fa-user-lock" ></i>
-                            </button>
-                          </td>
-                        </tr>   
-                        <%}%>                            
-                      </tbody> 
-                    </table>
                   </div>
-                  <!-- /.box-body -->
-                  </div>
-                  <!-- /.box -->
+                </div> 
+                <!-- /.box-header -->
+                <div class="box-body">
+                  <table id="example2" class="table table-bordered table-hover table-striped">
+                    <thead>
+                    <tr>
+                      <th>Nombres y Apellidos</th>
+                      <th>CI</th>
+                      <th>RU</th>
+                      <th>Acciones</th>
+                    </tr>
+                    </thead>
+                    <tbody id="tEstudiantes" style="display: none">
+                                                  
+                    </tbody> 
+                  </table>
+                </div>
+                <!-- /.box-body -->
+                </div>
+                <!-- /.box -->
             </div>
             <!-- /.box-body -->
           </div>
