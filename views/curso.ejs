@@ -7,6 +7,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title><%= title %></title>
   <%-include("partials/headImports") -%>
+  <style>
+    .desc {
+        max-width: .2vw !important;
+        white-space: nowrap !important;
+        text-overflow: ellipsis !important;
+        overflow: hidden !important;
+    }
+  </style>
   <script src="/adminlte/dist/js/charts.js"></script>
   <script src="/javascripts/curso.js"></script>
 
@@ -110,7 +118,7 @@
               <h2 class="box-title text-bold "> <i class="fas fa-book"></i> GUIAS</h2>
 
               <div class="box-tools pull-right">                  
-                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i>
+                <button type="button" id="guias"  class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i>
                 </button>
               </div> 
                                 
@@ -152,26 +160,11 @@
                         <th>N° GUIA </th>
                         <th>DESCRIPCION</th>
                         <th>FECHA</th>
-                        <th>OTRO CAMPO</th>
+                        
                         <th>ACCIONES</th>
                       </tr>
                       </thead>
-                      <tbody>
-                        <%for(var i = 1; i< 10;i++){%>
-                        <tr>
-                          <td><%=i%></td>
-                          <td>Descripcion guia <%=i%></td>
-                          <td>0<%=i%>/0<%=i%>/2019</td>
-                          <td>Campo <%=i%></td>
-                          <td>                            
-                            <button type="button" class="btn  btn-primary btn-sm">
-                              <i class="fas fa-info" ></i></button>
-                              <button type="button" class="btn  btn-success  btn-sm">
-                                  <i class="fas fa-edit" ></i>
-                              </button>
-                          </td>
-                        </tr>   
-                        <%}%>                            
+                      <tbody id="tGuias" style="display: none">                       
                       </tbody> 
                     </table>
                   </div>

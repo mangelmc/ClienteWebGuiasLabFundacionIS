@@ -88,11 +88,7 @@ $(document).ready(()=>{
             console.log( "error" ,err.responseJSON.error.message);
             console.log( "status" ,status);
 
-        })/*
-        .always(function() {
-            console.log( "complete" );
-        });*/
-       
+        })
     });
 
     $('.confirmarCalificacion').click(e=>{
@@ -126,7 +122,9 @@ $(document).ready(()=>{
                         title: data.message
                     }) 
                     .then(()=>{
-                        window.location=document.referrer
+                        let docente = new URLSearchParams(location.search).get('docente'); 
+                        let idEstudiante = $('#idEstudiante').text();
+                        location.replace('http://' + location.host + '/estudiantes/' + idEstudiante + '?docente=' + docente);
                     });
                     
                 })
@@ -142,7 +140,9 @@ $(document).ready(()=>{
                     timer: 3000
                 }) 
                 .then(()=>{
-                    window.location=document.referrer
+                    let docente = new URLSearchParams(location.search).get('docente'); 
+                    let idEstudiante = $('#idEstudiante').text();                    
+                    location.replace('http://' + location.host + '/estudiantes/' + idEstudiante + '?docente=' + docente);
                 })
             }
         })

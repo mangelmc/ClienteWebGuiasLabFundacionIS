@@ -6,9 +6,9 @@ const fetch = require('node-fetch');
 router.get('/', function(req, res, next) {
   console.log(req.query);
   if (req.query.docente != undefined && req.query.docente != '') {
-    fetch('http://localhost:8000/api/guias/?docente='+req.query.docente)
+    fetch('http://localhost:8000/api/guias?docente='+req.query.docente)
     .then(result => {
-      console.log('result',result);
+      //console.log('result',result);
       return result.json();
     })
     .then(result => {
@@ -24,6 +24,7 @@ router.get('/', function(req, res, next) {
     res.redirect('/');
   }
 });
+
 router.get('/nuevo', function(req, res, next) {
   res.render('guias', { title: 'Crear Guia' });
 });
