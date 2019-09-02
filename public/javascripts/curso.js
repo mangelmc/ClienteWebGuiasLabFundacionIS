@@ -68,66 +68,66 @@ $(document).ready(()=>{
         console.log($('#guias i').hasClass('fa-minus'));
         if (!$('#guias i').hasClass('fa-minus')) {
             
-        //e.preventDefault();
-        //queryparams
-        let searchParams = new URLSearchParams(window.location.search);        
-        //searchParams.has('sent') // true
-        let docente = searchParams.get('docente')
-        console.log(docente);
-        //param id del curso
-        var idCurso = window.location.pathname.split( '/' )[2];
-        console.log(idCurso);
-        //var config = require('./config');
-       $.ajax({
-                type: "Get",
-                url: "http://localhost:8000/api/guias?curso=" + idCurso,
-                
-                cache: false,
-                dataType: "json",
-                //contentType: 'application/json; charset=utf-8',//multipart/form-data, or text/plain
-                headers:{
-                    authorization: localStorage.getItem('authorization')||'bearer ',
-                    
-                }
-            })            
-            .done(function(result) {
-                console.log( "success" ,result);
+			//e.preventDefault();
+			//queryparams
+			let searchParams = new URLSearchParams(window.location.search);        
+			//searchParams.has('sent') // true
+			let docente = searchParams.get('docente')
+			console.log(docente);
+			//param id del curso
+			var idCurso = window.location.pathname.split( '/' )[2];
+			console.log(idCurso);
+			//var config = require('./config');
+			$.ajax({
+				type: "Get",
+				url: "http://localhost:8000/api/guias?curso=" + idCurso,
 
-                const t1 = '<tr><td>';
-                const t2 = '</td><td>';
-                const t3 =  '</td></tr>';
-                const a1 = '<a href="/guias/';
-                const a2 = '?docente='+ docente +'" type="button" class="btn btn-primary btn-sm"><i class="fas fa-info" ></i></a>';
-                const a3 = '<a href="#" type="button" class="btn  btn-success btn-sm"><i class="fas fa-edit" ></i></a>';
-                let html = '';
+				cache: false,
+				dataType: "json",
+				//contentType: 'application/json; charset=utf-8',//multipart/form-data, or text/plain
+				headers:{
+					authorization: localStorage.getItem('authorization')||'bearer ',
+					
+				}
+			})            
+			.done(function(result) {
+				console.log( "success" ,result);
 
-                let data = result.data;
-                //console.log(data);
-                
-                
-                for (let index = 0; index < data.length; index++) {
-                  html = html+ t1 + data[index].numero + '</td><td class="desc">';
-                  let contenido = data[index].contenidoHtml.split(/>/),texto = '';                            
-                  for(let i = 0; i < 6; i++){
-                    texto += contenido[i].split(/</)[0] + ' ';
-                  }
-                  html = html + texto + t2;
-                  html = html + data[index].fechaRegistro.substr(0,10) + t2;  
-                  html = html + a1 + data[index]._id + a2 + a3 + t3; 
-                }
-                
-                $('#tGuias').html(html).slideDown('slow');
-               
-            })
-            .fail(function(err,status) {
-               console.log( "error" ,err.responseJSON.error.message);
-              let html = '<tr><td colspan="4">Error al cargar los datos : ' + err.responseJSON.error.message + ' </td></tr>';
-              $('#tGuias').html(html).slideDown('slow');
-              console.log( "status" ,status);
-            })
-            .always(function() {
-                console.log( "complete" );
-            });
+				const t1 = '<tr><td>';
+				const t2 = '</td><td>';
+				const t3 =  '</td></tr>';
+				const a1 = '<a href="/guias/';
+				const a2 = '?docente='+ docente +'" type="button" class="btn btn-primary btn-sm"><i class="fas fa-info" ></i></a> ';
+				const a3 = '<a href="#" type="button" class="btn  btn-success btn-sm"><i class="fas fa-edit" ></i></a>';
+				let html = '';
+
+				let data = result.data;
+				//console.log(data);
+				
+				
+				for (let index = 0; index < data.length; index++) {
+					html = html+ t1 + data[index].numero + '</td><td class="desc">';
+					let contenido = data[index].contenidoHtml.split(/>/),texto = '';                            
+					for(let i = 0; i < 6; i++){
+					texto += contenido[i].split(/</)[0] + ' ';
+					}
+					html = html + texto + t2;
+					html = html + data[index].fechaRegistro.substr(0,10) + t2;  
+					html = html + a1 + data[index]._id + a2 + a3 + t3; 
+				}
+				
+				$('#tGuias').html(html).slideDown('slow');
+				
+			})
+			.fail(function(err,status) {
+				console.log( "error" ,err.responseJSON.error.message);
+				let html = '<tr><td colspan="4">Error al cargar los datos : ' + err.responseJSON.error.message + ' </td></tr>';
+				$('#tGuias').html(html).slideDown('slow');
+				console.log( "status" ,status);
+			})
+			.always(function() {
+				console.log( "complete" );
+			});
         }
 
          
