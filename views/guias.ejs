@@ -115,12 +115,13 @@
                       <tr>
                         <td class="desc"><%=data[i].numero%></td>
                         <td class="desc">
-                          <%let contenido = data[i].contenidoHtml.split(/>/),texto = '';                            
+                          <!-- <%let contenido = data[i].contenidoHtml.split(/>/),texto = '';                            
                             for(let i = 0; i < 6; i++){
                               texto += contenido[i].split(/</)[0] + ' ';
                             }
                           %>
-                          <%=texto%>
+                          <%=texto%> -->
+                          Descripcion de guia
                         </td>
                         <td><%=data[i].fechaRegistro.substr(0,10)%>%></td>
                         <td><%=data[i].curso.materia.sigla%> G<%=data[i].curso.grupo%></td>

@@ -144,8 +144,9 @@
                         <td><%=data[i].fechaRegistro.substr(0,10)%></td>
                         <td><%=data[i].nota%></td>
                         <td>
-                          <%if(data[i].estado == "por revisar"){%> 
-                          <a href="/laboratorios/<%=data[i]._id%>?docente=<%= query.docente%>&tipo=rev" type="button" class="btn  btn-success  btn-sm" title="Revisar">
+                          <%if(data[i].estado != "revisado"){%> 
+                          <!-- Revisar si se puede revisar aun estando pendiente el Laboratorio -->
+                           <a href="/laboratorios/<%=data[i]._id%>?docente=<%= query.docente%>&tipo=rev" type="button" class="btn  btn-success  btn-sm" title="Revisar">
                             <i class="fas fa-file-signature" ></i>
                           </a>                           
                           
