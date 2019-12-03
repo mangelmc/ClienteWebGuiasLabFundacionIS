@@ -9,7 +9,7 @@
   <title><%= title %></title>
   <%-include("../partials/headImports") -%>
   <script src="/javascripts/admin.js"></script>
-  <script src="/javascripts/cursos.js"></script>
+  <script src="/javascripts/guias.js"></script>
   
 
 </head>
@@ -31,12 +31,12 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>         
-        <span><i class="fas fa-users"></i>  LISTADO DE CURSOS</span>  
+        <span><i class="fas fa-users"></i>  LISTADO DE GUIAS</span>  
         <small>Todos los Cursos</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="/admin"><i class="fas fa-home"></i> Inicio</a></li>
-        <li class="active">Cursos</li>
+        <li class="active">Guias</li>
       </ol>
     </section>
     
@@ -48,10 +48,10 @@
           <div class="box box-primary box-solid collapsed-box">
             <div class="box-header with-border">
               
-              <h2 class="box-title text-bold "><i class="fas fa-users"></i> NUEVO CURSO </h2>
+              <h2 class="box-title text-bold "><i class="fas fa-users"></i> NUEVA GUIA </h2>
 
               <div class="box-tools pull-right">                  
-                <button type="button" id="cursos" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i>
+                <button type="button" id="guias" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i>
                 </button>
               </div>            
               <!-- /.box-tools -->
@@ -61,19 +61,19 @@
               <div class="box box-primary">
                 
                 <!-- form start -->
-                <form role="form" id="formCurso" method="POST" class="form-horizontal">
+                <form role="form" id="formGuia" method="POST" class="form-horizontal">
                   <div class="box-body col-sm-10">
                     <div class="form-group">
-                      <label for="materia"  class="col-sm-2 control-label">Materia</label>
+                      <label for="curso"  class="col-sm-2 control-label">Curso</label>
                       <div class="col-sm-10">
-                        <select name="materia" class="form-control" required id="smateria">
+                        <select name="curso" class="form-control" required id="scurso">
                          
                         </select>
                       </div>
                     </div>
-                    <div id="smateriaalert">
+                    <div id="scursoalert">
                       <div class="col-sm-12 callout callout-danger" style="display: none;">
-                        <p>No Hay materias disponibles</p>
+                        <p>No Hay cursos disponibles</p>
                       </div>
                     </div>
                     <div class="form-group">
@@ -91,12 +91,14 @@
                       </div>
                     </div>
                     <div class="form-group">
-                      <label for="gestion"  class="col-sm-2 control-label">gestion</label>
-                      <div class="col-sm-10"><input type="text" class="form-control" name="gestion" placeholder="ss/aaaa (Semestre/Año)" required></div>
+                      <label for="contenidoHtml" class="col-sm-2 control-label">contenidoHtml</label>
+                      <div class="col-sm-10">
+                        <textarea name="contenidoHtml" id="" class="form-control" required></textarea>
+                      </div>
                     </div>
                     <div class="form-group">
-                      <label for="grupo"  class="col-sm-2 control-label">grupo</label>
-                      <div class="col-sm-10"><input type="number" class="form-control" name="grupo" min="1" placeholder="grupo" required></div>
+                      <label for="numero"  class="col-sm-2 control-label">numero</label>
+                      <div class="col-sm-10"><input type="number" class="form-control" name="numero" min="1" placeholder="numero de guia" required></div>
                     </div>
                     
                   </div>
@@ -163,12 +165,9 @@
                   <table id="example2" class="table table-bordered table-hover table-striped ">
                     <thead>
                     <tr>
-                      <th>Nombre</th>
-                      <th>Sigla</th>
-                      <th>Nivel</th>
-                      <th>Gestion</th>
-                      <th>Docente</th>
-                      <th>Grupo</th>
+                      <th>Numero</th>
+                      <th>Curso</th>
+                      
                       <th>Registrado</th>
                       <!--<th>Acciones</th>-->
                     </tr>
@@ -179,15 +178,13 @@
                       var data = result.data;
                       for(var i = 0,len = data.length; i < len;i++){%>
                       <tr>
-                        <td><%=data[i].materia.nombre%></td>
-                        <td><%=data[i].materia.sigla%>%></td>
-                        <td><%=data[i].materia.nivel%>%></td>
-                        <td><%=data[i].gestion%></td>
-                        <td><%=data[i].docente%>%></td>
-                        <td><%=data[i].grupo%>%></td>
+                        <td><%=data[i].numero%></td>
+                        <td><%=data[i].curso.materia.nombre%> <%=data[i].curso.materia.sigla%> <%=data[i].curso.grupo%></td>
+
+                        
                         <td><%=data[i].fechaRegistro.substr(0,10)%></td>
                         <td>
-                          <a href="#" type="button" id="<%=data[i]._id%>" class="btn btn-success btn-sm addEst" dataG="<%=data[i].gestion%>" title="Agregar estudiante" >
+                          <a href="#" type="button" id="<%=data[i]._id%>" class="btn btn-success btn-sm addPreg" dataG="<%=data[i].gestion%>" title="Agregar Pregunta" >
                             <i class="fas fa-plus" ></i>
                           </a>  
                           <!-- <a href="#" type="button" class="btn  btn-danger btn-sm">
@@ -220,22 +217,43 @@
               <div class="modal-body">
 
                 <!-- form start -->
-                <form role="form" id="formEstudiante" method="POST" class="form-horizontal">
+                <form role="form" id="formPregunta" method="POST" class="form-horizontal">
                   <div class="box-body col-sm-12">
                     <div class="form-group">
-                      <label for="estudiante"  class="col-sm-2 control-label">Estudiante</label>
+                      <label for="tipo"  class="col-sm-2 control-label">tipo</label>
                       <div class="col-sm-10">
-                        <select name="estudiante" class="form-control" required id="sestudiante">
-                          
+                        <select name="tipo" class="form-control" required id="stipo">
+                          <option value="texto">Texto</option>
+                          <option value="texto">Texto</option>
+                          <option value="texto">Texto</option>
+
                         </select>
                       </div>
-                      <input type="hidden" name="curso" value="" id="cursoid" required>
-                      <input type="hidden" name="gestion" value=" " id="gestionid" required>
-
+                      <input type="hidden" name="guia" value="" id="guiaid" required>
                     </div>
-                    <div id="sestudiantealert">
-                      <div class="col-sm-12 callout callout-danger" style="display: none;">
-                        <p>No Hay estudiantes disponibles</p>
+                    <div class="form-group">
+                      <label for="label" class="col-sm-2 control-label">label</label>
+                      <div class="col-sm-10">
+                        <input type="text" name="label" id="label" class="form-control" required placeholder="texto de la pregunta">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="input" class="col-sm-2 control-label">input</label>
+                      <div class="col-sm-10">
+                        <textarea name="input" id="input" class="form-control" required placeholder="texto en html"></textarea>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="valorS100" class="col-sm-2 control-label">valorS100</label>
+                      <div class="col-sm-10">
+                        <input type="number" name="valorS100" min="1" id="valorS100" class="form-control" required placeholder="">
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="respuesta" class="col-sm-2 control-label">respuesta</label>
+                      <div class="col-sm-10">
+                        <textarea name="respuesta" id="" class="form-control" required placeholder="respuesta esperada"></textarea>
                       </div>
                     </div>
                     

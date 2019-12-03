@@ -30,18 +30,12 @@
       </a>
       <ul class="treeview-menu">
         <li><a href="/guias?docente=<%= docente%>"><i class="fas fa-book-reader"></i> Ver</a></li>
-        <li><a href="/guias/nuevo"><i class="fas fa-file-signature"></i> Nuevo</a></li>
+        <li><a href="/guias/nuevo?docente=<%= docente%>"><i class="fas fa-file-signature"></i> Nuevo</a></li>
       </ul>
     </li>
   </ul>
   <!-- /.sidebar-menu -->
-  <!-- Sidebar Menu admin-->
-  <ul class="sidebar-menu " data-widget="tree">
-    <li class="header">OPCIONES BD</li>
-    <!-- Optionally, you can add icons to the links -->
-    <li class="active"><a href="/admin?docente=<%= docente%>"><i class="fas fa-user-alt"></i> <span>Admin</span></a></li>
-    
-  </ul>
+  
   <!-- /.sidebar-menu admin-->
 </section>
 <!-- /.sidebar -->
