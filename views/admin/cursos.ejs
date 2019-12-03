@@ -1,0 +1,231 @@
+
+<!DOCTYPE html>
+
+<html>
+<head>
+  
+  <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title %></title>
+  <%-include("../partials/headImports") -%>
+  <script src="/javascripts/admin.js"></script>
+  <script src="/javascripts/cursos.js"></script>
+  
+
+</head>
+
+<body class="hold-transition skin-blue sidebar-mini">
+    
+<div class="wrapper">
+
+  <!-- Main Header -->
+  <header class="main-header">
+      <%-include("../partials/header") -%>
+  </header>
+  <!-- Left side column. contains the logo and sidebar -->
+  <aside class="main-sidebar">
+      <%-include('../partials/adminSidebar'); -%>
+  </aside>
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>         
+        <span><i class="fas fa-users"></i>  LISTADO DE CURSOS</span>  
+        <small>Todos los Cursos</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="/admin"><i class="fas fa-home"></i> Inicio</a></li>
+        <li class="active">Cursos</li>
+      </ol>
+    </section>
+    
+    <!-- Main content -->
+    <section class="content container-fluid">
+      
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="box box-primary box-solid collapsed-box">
+            <div class="box-header with-border">
+              
+              <h2 class="box-title text-bold "><i class="fas fa-users"></i> NUEVO CURSO </h2>
+
+              <div class="box-tools pull-right">                  
+                <button type="button" id="cursos" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i>
+                </button>
+              </div>            
+              <!-- /.box-tools -->
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body" >
+              <div class="box box-primary">
+                
+                <!-- form start -->
+                <form role="form" id="formCurso" method="POST" class="form-horizontal">
+                  <div class="box-body col-sm-10">
+                    <div class="form-group">
+                      <label for="materia"  class="col-sm-2 control-label">Materia</label>
+                      <div class="col-sm-10">
+                        <select name="materia" class="form-control" required id="smateria">
+                         
+                        </select>
+                      </div>
+                    </div>
+                    <div id="smateriaalert">
+                      <div class="col-sm-12 callout callout-danger" style="display: none;">
+                        <p>No Hay materias disponibles</p>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="docente"  class="col-sm-2 control-label">Docente</label>
+                      <div class="col-sm-10">
+                        <select name="docente" class="form-control" required id="sdocente">
+                          
+                        </select>
+                      </div>
+                      
+                    </div>
+                    <div id="sdocentealert">
+                      <div class="col-sm-12 callout callout-danger" style="display: none;">
+                        <p>No Hay Docentes disponibles</p>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="gestion"  class="col-sm-2 control-label">gestion</label>
+                      <div class="col-sm-10"><input type="text" class="form-control" name="gestion" placeholder="ss/aaaa (Semestre/Año)" required></div>
+                    </div>
+                    <div class="form-group">
+                      <label for="grupo"  class="col-sm-2 control-label">grupo</label>
+                      <div class="col-sm-10"><input type="number" class="form-control" name="grupo" min="1" placeholder="grupo" required></div>
+                    </div>
+                    
+                  </div>
+                  <!-- /.box-body -->
+                  <div class="box-footer col-sm-10">
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                  </div>
+                </form>
+                
+              </div>
+              
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+          <div>
+            <div class="col-sm-10 callout callout-danger" style="display: none" id="alertError">
+              <h4>Error al guardar la informacion!</h4>
+
+              <p id="alertErrorText"></p>
+            </div>
+          </div>
+          <div>
+            <div class="col-sm-10 callout callout-success" style="display: none" id="alertOk">
+              <h4 id="alertOkText"></h4>
+            </div>
+          </div>
+        </div>
+        <!-- /.col -->
+                    
+        <div class="col-xs-12">
+          <%
+          if (result.error){ %>
+            <div class="error-page">
+              <h2 class="headline text-red">500</h2>      
+              <div class="error-content">
+                <h3><i class="fa fa-warning text-red"></i> Oops! Algo va mal.</h3>
+                <p>
+                  Descripcion del error : <%= result.error %>
+                </p>
+                <p>
+                  Si deseas, puedes <a href="/admin">regresar a la Pagina de inicio</a>
+                </p>                  
+              </div>
+            </div>
+          <%}
+          else{
+            if(result.message){  %>
+              <div class="callout callout-info">
+                <h4><%= result.message %>!</h4>            
+              </div>
+            <%  
+            }else{%>
+              <div class="box">
+                <div class="box-header"> 
+                    
+                  <div class="box-tools pull-right"> 
+                      
+                    
+                  </div>
+                </div> 
+                <!-- /.box-header -->
+                <div class="box-body table-responsive">
+                  <table id="example2" class="table table-bordered table-hover table-striped ">
+                    <thead>
+                    <tr>
+                      <th>Nombre</th>
+                      <th>Sigla</th>
+                      <th>Nivel</th>
+                      <th>Gestion</th>
+                      <th>Docente</th>
+                      <th>Grupo</th>
+                      <th>Registrado</th>
+                      <!--<th>Acciones</th>-->
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                      <%
+                      var data = result.data;
+                      for(var i = 0,len = data.length; i < len;i++){%>
+                      <tr>
+                        <td><%=data[i].materia.nombre%></td>
+                        <td><%=data[i].materia.sigla%>%></td>
+                        <td><%=data[i].materia.nivel%>%></td>
+                        <td><%=data[i].gestion%></td>
+                        <td><%=data[i].docente%>%></td>
+                        <td><%=data[i].grupo%>%></td>
+                        <td><%=data[i].fechaRegistro.substr(0,10)%></td>
+                        <!--<td>
+                          <a href="#" type="button" class="btn  btn-success  btn-sm" title="Mas info">
+                            <i class="fas fa-info" ></i>
+                          </a>  
+                          <a href="#" type="button" class="btn  btn-danger btn-sm">
+                            <i class="fas fa-user-lock" ></i>
+                          </a>
+                        </td>-->
+                      </tr>   
+                      <%}%>
+                                                 
+                    </tbody> 
+                  </table>
+                </div>
+                <!-- /.box-body -->
+              </div>
+              <!-- /.box -->
+              <%}%> 
+          <%}%>           
+        </div>
+        <!-- /.col -->
+      </div>
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+
+  
+  <%-include("../partials/footer") -%>
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+
+  </aside>
+  <!-- /.control-sidebar -->
+  <!-- Add the sidebar's background. This div must be placed
+  immediately after the control sidebar -->
+  <div class="control-sidebar-bg"></div>
+
+
+</div>
+
+</body>
+</html>

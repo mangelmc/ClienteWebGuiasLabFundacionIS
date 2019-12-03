@@ -11,6 +11,9 @@ const estudiantesRouter = require('./routes/estudiantes');
 const guiasRouter = require('./routes/guias');
 const homeRouter = require('./routes/home');
 const laboratoriosRouter = require('./routes/laboratorios');
+const adminUsuariosRouter = require('./routes/admin/usuarios');
+const adminMateriasRouter = require('./routes/admin/materias');
+const adminCursosRouter = require('./routes/admin/cursos');
 
 var app = express();
 
@@ -34,7 +37,9 @@ app.use('/estudiantes', estudiantesRouter);
 app.use('/guias', guiasRouter);
 app.use('/home', homeRouter);
 app.use('/laboratorios', laboratoriosRouter);
-
+app.use('/admin/usuarios', adminUsuariosRouter);
+app.use('/admin/materias', adminMateriasRouter);
+app.use('/admin/cursos', adminCursosRouter);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));

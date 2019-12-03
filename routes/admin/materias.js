@@ -5,34 +5,25 @@ const fetch = require('node-fetch');
 /* GET home page. */
 router.get('/', function(req, res) {
   console.log(req.query);
-  let ok=true,status=200;
-  if (req.query.docente != undefined && req.query.docente != '') {
-    fetch('http://localhost:8000/api/cursos/?docente='+req.query.docente)
+
+  fetch('http://localhost:8000/api/materias')
     .then(result => {
-      /*console.log('result',result);
-      console.log(result.ok);
-        console.log(result.status);
-        console.log(result.statusText);
-        ok=result.ok;
-        status=result.status;    */    
+        
       return result.json();
     })
     .then(result => {
       
-      /*
-      console.log('json', result);
-      console.log('ok',ok);
-      console.log('status', status);*/
       
-      res.render('cursos', { title: 'Cursos' ,result:result,query:req.query});
+      console.log('json', result);
+      
+      res.render('admin/materias', { title: 'Materias' ,result:result});
       
     })
     .catch(err => {
-      console.log(err);
+      console.log(err);     
+      res.redirect('/');
     })
-  }else{
-    res.redirect('/');
-  }  
+ 
 });
 
 

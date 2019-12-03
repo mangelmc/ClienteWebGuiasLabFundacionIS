@@ -46,14 +46,15 @@ $(document).ready(()=>{
                   html = html + data[index].estudiante.rud + t2;  
                   html = html + a1 + data[index].estudiante._id + a2 + t3; 
                 }
-                
-                $('#tEstudiantes').html(html).slideDown('slow');
+                $('#tableEst').fadeIn('slow');
+                $('#tEstudiantes').html(html).show('slow');
                
             })
             .fail(function(err,status) {
-               console.log( "error" ,err.responseJSON.error.message);
-              let html = '<tr><td colspan="4">Error al cargar los datos : ' + err.responseJSON.error.message + ' </td></tr>';
-              $('#tEstudiantes').html(html).slideDown('slow');
+               console.log( "error" ,err);
+               
+                $('#textEst').text(err.responseJSON.message || err.responseJSON.error || 'error');
+                $('#bodyEst').show('slow');
               console.log( "status" ,status);
             })
             .always(function() {
@@ -73,10 +74,10 @@ $(document).ready(()=>{
 			let searchParams = new URLSearchParams(window.location.search);        
 			//searchParams.has('sent') // true
 			let docente = searchParams.get('docente')
-			console.log(docente);
+			//console.log(docente);
 			//param id del curso
 			var idCurso = window.location.pathname.split( '/' )[2];
-			console.log(idCurso);
+			//console.log(idCurso);
 			//var config = require('./config');
 			$.ajax({
 				type: "Get",
@@ -117,13 +118,14 @@ $(document).ready(()=>{
 					html = html + a1 + data[index]._id + a2 + a3 + t3; 
 				}
 				
-				$('#tGuias').html(html).slideDown('slow');
 				
+				$('#tableGuia').fadeIn('slow');
+                $('#tGuias').html(html).show('slow');
 			})
 			.fail(function(err,status) {
-				console.log( "error" ,err.responseJSON.error.message);
-				let html = '<tr><td colspan="4">Error al cargar los datos : ' + err.responseJSON.error.message + ' </td></tr>';
-				$('#tGuias').html(html).slideDown('slow');
+				console.log( "error" ,err);
+				$('#textGuia').text(err.responseJSON.message || err.responseJSON.error || 'error');
+                $('#bodyGuia').show('slow');
 				console.log( "status" ,status);
 			})
 			.always(function() {
@@ -152,19 +154,21 @@ $(document).ready(()=>{
         }
     })            
     .done(function(result) {
-        console.log( "success" ,result);
+        console.log( "success esta" ,result);
 
-        let guia = result.guias[0]
-        console.log('guia 0', guia.curso.gestion);
-        console.log(result.guias.length);
-
-
+        
+        
+        //console.log(result.guias.length);
         var labs = result.data;
         var guias = result.guias;
 
+        
+        $('#bodyBar').fadeIn('slow');
+        $('#bodyPie').fadeIn('slow');
+            
         var dcontPen = 0, dcontPor = 0,dcontRev = 0;
         for (let i = 0; i < labs.length; i++) {
-           
+            
             if (labs[i].estado == 'revisado') {
                 dcontRev ++;
             }else{
@@ -179,11 +183,16 @@ $(document).ready(()=>{
         }
         var ctx = $('#pieChart');
         //var ctx = 'myChart';
-        
+        var prom = dcontPen + dcontPor + dcontRev;
+        var prev = dcontRev / prom *100 , pnrev = dcontPor / prom * 100, ppen = dcontPen / prom * 100;
+
         var myChart = new Chart(ctx, {
             type: 'doughnut',
             data: {
-            labels: ['REVISADOS', 'NO REVISADOS', 'PENDIENTES'],
+            labels: [
+                'REVISADOS ' + Math.round(prev * 100) / 100  + '%',
+                'NO REVISADOS ' + Math.round(pnrev * 100) / 100  + '%',
+                'PENDIENTES '+ Math.round(ppen * 100) / 100  + '%'],
             datasets: [{
                 label: 'Label',
                 data: [dcontRev , dcontPor, dcontPen],
@@ -244,12 +253,14 @@ $(document).ready(()=>{
             cnrev.push('#f39c12');
             cpen.push('#f56954');
             llabs.push('Lab '+guias[i].numero);
-           //aqui 
+            //aqui 
         }
 
         console.log('graf', graf);
 
-        var ctxBar = document.getElementById("barChart");
+        var ctxBar = $("#barChart");
+        
+
         var myChartBar = new Chart(ctxBar, {
             type: 'bar',
             data: {
@@ -285,20 +296,27 @@ $(document).ready(()=>{
                 }]
             }
             }
-        });
+        }); 
+        
+
+        
+
+        
     
         
         
         
     })
     .fail(function(err,status) {
-        console.log( "error" ,err.responseJSON.error.message);
+        console.log( "error" ,err);
         
+        $('#textChart').text(err.responseJSON.message || err.responseJSON.error || 'No se puede mostar las Estadisticas');
+        $('#bodyChart').show('slow');
         console.log( "status" ,status);
-    })
+    })/* 
     .always(function() {
         console.log( "complete" );
-    });
+    }) */;
     
     
     
