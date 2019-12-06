@@ -15,6 +15,8 @@ const adminUsuariosRouter = require('./routes/admin/usuarios');
 const adminMateriasRouter = require('./routes/admin/materias');
 const adminCursosRouter = require('./routes/admin/cursos');
 const adminGuiasRouter = require('./routes/admin/guias');
+const adminLaboratoriosRouter = require('./routes/admin/laboratorios');
+
 var app = express();
 
 
@@ -41,7 +43,7 @@ app.use('/admin/usuarios', adminUsuariosRouter);
 app.use('/admin/materias', adminMateriasRouter);
 app.use('/admin/cursos', adminCursosRouter);
 app.use('/admin/guias', adminGuiasRouter);
-
+app.use('/admin/laboratorios', adminLaboratoriosRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

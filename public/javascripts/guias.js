@@ -2,13 +2,13 @@ $(document).ready(()=>{
     console.log('ok guias');
     
     
-    $('#guias').click(e => {
+    $('#guiass').click(e => {
         e.preventDefault();
         if (!$('#guias i').hasClass('fa-minus')) {
             $.ajax({
                     type: "get",
                     url: "http://localhost:8000/api/cursos",
-                    //data: obj,
+                    //data:  obj,
                     cache: false,
                     dataType: "json",
                     //contentType: 'application/json; charset=utf-8',//multipart/form-data, or text/plain

@@ -9,7 +9,7 @@
   <title><%= title %></title>
   <%-include("../partials/headImports") -%>
   <script src="/javascripts/admin.js"></script>
-  <script src="/javascripts/guias.js"></script>
+  <script src="/javascripts/laboratorios.js"></script>
   
 
 </head>
@@ -48,10 +48,10 @@
           <div class="box box-primary box-solid collapsed-box">
             <div class="box-header with-border">
               
-              <h2 class="box-title text-bold "><i class="fas fa-users"></i> NUEVA GUIA </h2>
+              <h2 class="box-title text-bold "><i class="fas fa-users"></i> NUEVO  LABORATORIO</h2>
 
               <div class="box-tools pull-right">                  
-                <button type="button" id="guiass" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i>
+                <button type="button" id="labs" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i>
                 </button>
               </div>            
               <!-- /.box-tools -->
@@ -61,13 +61,13 @@
               <div class="box box-primary">
                 
                 <!-- form start -->
-                <form role="form" id="formGuia" method="POST" class="form-horizontal">
+                <form role="form" id="formLab" method="POST" class="form-horizontal">
                   <div class="box-body col-sm-10">
                     <div class="form-group">
                       <label for="curso"  class="col-sm-2 control-label">Curso</label>
                       <div class="col-sm-10">
                         <select name="curso" class="form-control" required id="scurso">
-                         
+                          
                         </select>
                       </div>
                     </div>
@@ -77,34 +77,37 @@
                       </div>
                     </div>
                     <div class="form-group">
-                      <label for="docente"  class="col-sm-2 control-label">Docente</label>
+                      <label for="estudiante"  class="col-sm-2 control-label">Estudiante</label>
                       <div class="col-sm-10">
-                        <select name="docente" class="form-control" required id="sdocente">
-                          
+                        <select name="estudiante" class="form-control" required id="sestudiante">
+                          <option value="-">---</option>
                         </select>
                       </div>
                       
                     </div>
-                    <div id="sdocentealert">
+                    <div id="sestudiantealert">
                       <div class="col-sm-12 callout callout-danger" style="display: none;">
-                        <p>No Hay Docentes disponibles</p>
+                        <p>No Hay estudiantes disponibles</p>
                       </div>
                     </div>
                     <div class="form-group">
-                      <label for="contenidoHtml" class="col-sm-2 control-label">contenidoHtml</label>
+                      <label for="guia"  class="col-sm-2 control-label">guia</label>
                       <div class="col-sm-10">
-                        <textarea name="contenidoHtml" id="" class="form-control" required></textarea>
+                        <select name="guia" class="form-control" required id="sguia">
+                          <option value="-">---</option>
+                        </select>
+                      </div>
+                      
+                    </div>
+                    <div id="sguiaalert">
+                      <div class="col-sm-12 callout callout-danger" style="display: none;">
+                        <p>No Hay guias disponibles</p>
                       </div>
                     </div>
-                    <div class="form-group">
-                      <label for="numero"  class="col-sm-2 control-label">numero</label>
-                      <div class="col-sm-10"><input type="number" class="form-control" name="numero" min="1" placeholder="numero de guia" required></div>
-                    </div>
-                    
                   </div>
                   <!-- /.box-body -->
                   <div class="box-footer col-sm-10">
-                    <button type="submit" class="btn btn-primary">Guardar</button>
+                    <button type="submit" class="btn btn-primary">Crear</button>
                   </div>
                 </form>
                 
@@ -128,7 +131,10 @@
           </div>
         </div>
         <!-- /.col -->
-                    
+
+
+        
+        
         <div class="col-xs-12">
           <%
           if (result.error){ %>
@@ -205,88 +211,7 @@
         </div>
         <!-- /.col -->
         
-        <!-- Modal add student -->
-        <div class="modal modal-info fade" id="modal-info" style="display: none">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">×</span></button>
-                <h4 class="modal-title" id="sibling"></h4>
-              </div>
-              <div class="modal-body">
-
-                <!-- form start -->
-                <form role="form" id="formPregunta" method="POST" class="form-horizontal">
-                  <div class="box-body col-sm-12">
-                    <div class="form-group">
-                      <label for="tipo"  class="col-sm-2 control-label">tipo</label>
-                      <div class="col-sm-10">
-                        <select name="tipo" class="form-control" required id="stipo">
-                          <option value="texto">Texto</option>
-                          <option value="texto">Texto</option>
-                          <option value="texto">Texto</option>
-
-                        </select>
-                      </div>
-                      <input type="hidden" name="guia" value="" id="guiaid" required>
-                    </div>
-                    <div class="form-group">
-                      <label for="label" class="col-sm-2 control-label">label</label>
-                      <div class="col-sm-10">
-                        <input type="text" name="label" id="label" class="form-control" required placeholder="texto de la pregunta">
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <label for="input" class="col-sm-2 control-label">input</label>
-                      <div class="col-sm-10">
-                        <textarea name="input" id="input" class="form-control" required placeholder="texto en html"></textarea>
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <label for="valorS100" class="col-sm-2 control-label">valorS100</label>
-                      <div class="col-sm-10">
-                        <input type="number" name="valorS100" min="1" id="valorS100" class="form-control" required placeholder="">
-                      </div>
-                    </div>
-
-                    <div class="form-group">
-                      <label for="respuesta" class="col-sm-2 control-label">respuesta</label>
-                      <div class="col-sm-10">
-                        <textarea name="respuesta" id="" class="form-control" required placeholder="respuesta esperada"></textarea>
-                      </div>
-                    </div>
-                    
-                    
-                  </div>
-                  <!-- /.box-body -->
-                  <div class="modal-footer">
-                    <button type="submit" class="btn btn-outline" id="">Agregar</button>
-                    <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Cerrar</button>
-                  </div>
-
-                </form>
-                <div>
-                  <div class="col-sm-10 callout callout-danger" style="display: none" id="alertError">
-                    <h4>Error al guardar la informacion!</h4>
-      
-                    <p id="alertErrorText"></p>
-                  </div>
-                </div>
-                <div>
-                  <div class="col-sm-10 callout callout-success" style="display: none" id="alertOk">
-                    <h4 id="alertOkText"></h4>
-                  </div>
-                </div>
-              </div>
-              <div class="modal-footer">
-                
-              </div>
-            </div>
-            <!-- /.modal-content -->
-          </div>
-          <!-- /.modal-dialog -->
-        </div>
+        
         
       </div>
     </section>
@@ -296,14 +221,7 @@
 
   
   <%-include("../partials/footer") -%>
-  <!-- Control Sidebar -->
-  <aside class="control-sidebar control-sidebar-dark">
-
-  </aside>
-  <!-- /.control-sidebar -->
-  <!-- Add the sidebar's background. This div must be placed
-  immediately after the control sidebar -->
-  <div class="control-sidebar-bg"></div>
+  
 
 
 </div>
