@@ -88,6 +88,7 @@ $(document).ready(()=>{
         e.preventDefault();
         //console.log(e.target.id);
         $('#cursoid').val(e.target.id);
+        
         $('#gestionid').val($(e.target).attr('dataG'));
         
         

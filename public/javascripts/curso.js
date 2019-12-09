@@ -141,6 +141,7 @@ $(document).ready(()=>{
 			
 	let docente = searchParams.get('docente')
     var idCurso = window.location.pathname.split( '/' )[2];
+    console.log(idCurso);
     $.ajax({
         type: "Get",
         url: "http://localhost:8000/api/cursos/estadisticas?docente=" + docente + "&curso=" + idCurso,
@@ -297,13 +298,6 @@ $(document).ready(()=>{
             }
             }
         }); 
-        
-
-        
-
-        
-    
-        
         
         
     })

@@ -183,7 +183,7 @@
                         <td><%=data[i].materia.sigla%>%></td>
                         <td><%=data[i].materia.nivel%>%></td>
                         <td><%=data[i].gestion%></td>
-                        <td><%=data[i].docente%>%></td>
+                        <td><%=data[i].docente.nombre%>%></td>
                         <td><%=data[i].grupo%>%></td>
                         <td><%=data[i].fechaRegistro.substr(0,10)%></td>
                         <td>
@@ -230,7 +230,7 @@
                         </select>
                       </div>
                       <input type="hidden" name="curso" value="" id="cursoid" required>
-                      <input type="hidden" name="gestion" value=" " id="gestionid" required>
+                      <input type="hidden" name="gestion" value="" id="gestionid" required>
 
                     </div>
                     <div id="sestudiantealert">
