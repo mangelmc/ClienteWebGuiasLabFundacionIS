@@ -87,10 +87,10 @@ $(document).ready(()=>{
     $('.addEst').click(e => {
         e.preventDefault();
         //console.log(e.target.id);
-        $('#cursoid').val(e.target.id);
-        
-        $('#gestionid').val($(e.target).attr('dataG'));
-        
+        $('#cursoid').val(e.currentTarget.id);
+        //console.log('current',e.currentTarget.dataset.gestion);
+       
+        $('#gestionid').val(e.currentTarget.dataset.gestion);
         
         $.ajax({
             type: "get",
@@ -105,7 +105,7 @@ $(document).ready(()=>{
             }
         })            
         .done(function(result) {
-            console.log( "success" ,result);
+            //console.log( "success" ,result);
             let html = '',p1 = '<option value="',p2 = '">', p3 = '</option>';
             let data = result;
             if (data.length > 0) {
@@ -122,18 +122,11 @@ $(document).ready(()=>{
         })
         .fail(function(err,status) {
             console.log( "error" ,err);
-            //$('#alertErrorText').text(err.responseJSON.message || err.responseJSON.error || 'Error inesperado');
-            //$('#alertError').slideDown();
-            /* setTimeout(()=>{
-                $('#alertError').slideUp();
-                
-            },4000); */
-            console.log( "status" ,status);
         })
-        let prev = $(e.target).parent().prev().prev();
+        let prev = $(e.currentTarget).parent().prev().prev();
         let chain = ' Agregar Estudiante al curso ' + prev.prev().prev().prev().prev().text();
         chain += ' ' + prev.prev().prev().text();
-        chain += ' ' + prev.text();
+        chain += ' G-' + prev.text();
 
         $('#sibling').text(chain);
         $('#modal-info').modal('show');
@@ -146,7 +139,7 @@ $(document).ready(()=>{
         form.forEach((value,key)=>{
             obj[key] = value;
         })
-       
+       /* Agregar estudiante a un curso*/
        $.ajax({
                 type: "post",
                 url: "http://localhost:8000/api/integrantes",
@@ -160,26 +153,25 @@ $(document).ready(()=>{
                 }
             })            
             .done(function(result) {
-                console.log( "success" ,result);
+                //console.log( "success" ,result);
                 $('#alertOkText').text(result.message || 'Peticion correcta');
                 $('#alertOk').slideDown();
                 setTimeout(()=>{
                     $('#alertOk').slideUp();
                     
-                },5000);
-                
+                },5000);                
                 $('#modal-info').modal('hide');
                
             })
             .fail(function(err,status) {
-                console.log( "error" ,err);
+                //console.log( "error" ,err);
                 $('#alertErrorText').text(err.responseJSON.message || err.responseJSON.error || 'Error inesperado');
                 $('#alertError').slideDown();
                 setTimeout(()=>{
                     $('#alertError').slideUp();
                     
                 },4000);
-                console.log( "status" ,status);
+                $('#modal-info').modal('hide');
             })
 
     })

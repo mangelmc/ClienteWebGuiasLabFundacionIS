@@ -291,7 +291,7 @@ $(document).ready(()=>{
                             insRespuestas(labId,value._id)
                         })
                        
-                        window.location.replace("/admin/laboratorios/"+ labId);
+                        window.location.assign("/admin/laboratorios/"+ labId);
 
                     }else{
                         $('#sguiaalert').fadeIn('slow');

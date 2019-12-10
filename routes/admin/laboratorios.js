@@ -4,9 +4,9 @@ const fetch = require('node-fetch');
 
 /* GET home page. */
 router.get('/', function(req, res) {
-  console.log(req.query);
+  
 
-  fetch('http://localhost:8000/api/guias')
+  fetch('http://localhost:8000/api/laboratorios')
     .then(result => {
         
       return result.json();
@@ -14,7 +14,7 @@ router.get('/', function(req, res) {
     .then(result => {
       
       
-      console.log('json', result);
+      //console.log('json', result);
       
       res.render('admin/laboratorios', { title: 'laboratorios' ,result:result});
       

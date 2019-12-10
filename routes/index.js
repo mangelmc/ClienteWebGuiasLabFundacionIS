@@ -2,15 +2,24 @@ var express = require('express');
 var router = express.Router();
 const fetch = require('node-fetch');
 
+const WebStorageES6 = require('web-storage-es6');
+
+// Create a local storage with 'default' namespace
+var localStorage = new WebStorageES6('Local');
+
+
+
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('login', { title: 'Login' ,message:'none' });
 });
 router.post('/', function(req, res, next) {
-
  
-  if (req.body.email == 'admin@admin.com' && req.body.password == 'admin') {
+  if (req.body.email == 'admin@admin.com' && req.body.password == 'admin') {     
+    
     res.redirect('admin/usuarios');
+
   }else{
     let body = {email: req.body.email,password: req.body.password};
     
@@ -32,6 +41,7 @@ router.post('/', function(req, res, next) {
       if (result.tipo == 'estudiante') {
         return res.render('login', { title: 'Inicio Docente', message : 'Acceso solo para docentes' });
       }else{
+        
         return res.redirect('/home?docente=' + result.id );
       }
      

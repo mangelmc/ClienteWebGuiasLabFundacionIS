@@ -187,7 +187,7 @@
                         <td><%=data[i].grupo%>%></td>
                         <td><%=data[i].fechaRegistro.substr(0,10)%></td>
                         <td>
-                          <a href="#" type="button" id="<%=data[i]._id%>" class="btn btn-success btn-sm addEst" dataG="<%=data[i].gestion%>" title="Agregar estudiante" >
+                          <a href="#" type="button" id="<%=data[i]._id%>" class="btn btn-success btn-sm addEst" data-gestion="<%=data[i].gestion%>" title="Agregar estudiante" >
                             <i class="fas fa-plus" ></i>
                           </a>  
                           <!-- <a href="#" type="button" class="btn  btn-danger btn-sm">
@@ -230,7 +230,7 @@
                         </select>
                       </div>
                       <input type="hidden" name="curso" value="" id="cursoid" required>
-                      <input type="hidden" name="gestion" value="" id="gestionid" required>
+                      <input type="hidden" name="gestion"  id="gestionid" required>
 
                     </div>
                     <div id="sestudiantealert">
