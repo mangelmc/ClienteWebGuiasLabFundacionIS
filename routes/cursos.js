@@ -37,7 +37,7 @@ router.get('/', function(req, res) {
 
 
 router.get('/:id', function(req, res) {
-  console.log(req.query);
+  //console.log(req.query);
   let ok=true,status=200;
   if (req.query.docente != undefined && req.query.docente != '') {
     fetch('http://localhost:8000/api/cursos/'+ req.params.id +'?docente='+req.query.docente)
@@ -53,7 +53,7 @@ router.get('/:id', function(req, res) {
     .then(result => {
       
       
-      console.log('json', result);
+      //console.log('json', result);
       /*console.log('ok',ok);
       console.log('status', status);*/
       

@@ -16,7 +16,7 @@ router.get('/', function(req, res, next) {
 });
 router.post('/', function(req, res, next) {
  
-  if (req.body.email == 'admin@admin.com' && req.body.password == 'admin') {     
+  /* if (req.body.email == 'admin@admin.com' && req.body.password == 'admin') {     
     
     res.redirect('admin/usuarios');
 
@@ -52,7 +52,7 @@ router.post('/', function(req, res, next) {
     })
     
 
-  }
+  } */
   
 });
 module.exports = router;

@@ -20,16 +20,17 @@
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <img src="/images/docente.png" class="user-image" alt="User Image">
-              <span class="hidden-xs">Nombre de Usuario</span>
+              <span class="hidden-xs" id="user-name">Nombre de Usuario</span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
               <li class="user-header">
                 <img src="/images/docente.png" class="img-circle" alt="User Image">
 
-                <p>
-                  Nombre Y Apellidos
-                  <small>Otra info</small>
+                <p id="user-data">
+                    <span>Nombre Y Apellidos </span>
+                    <small class="email">Email</small>
+                    <small class="rud">RD</small>
                 </p>
               </li>
               <!-- Menu Body 
@@ -49,11 +50,11 @@
               </li>-->
               <!-- Menu Footer-->
               <li class="user-footer">
-                <div class="pull-left">
-                  <a href="#" class="btn btn-default btn-flat">Prefil</a>
-                </div>
+                <!-- <div class="pull-left">
+                  <a href="#" class="btn btn-default btn-flat">Pfil</a>
+                </div> -->
                 <div class="pull-right">
-                  <a href="#" class="btn btn-default btn-flat">Cerrar Sesión</a>
+                  <a href="#" class="btn btn-default btn-flat" id="logout">Cerrar Sesión</a>
                 </div>
               </li>
             </ul>
@@ -64,4 +65,21 @@
           </li>-->
         </ul>
       </div>
+      <script>
+        let nombre = localStorage.getItem('nombre');
+        let rud = localStorage.getItem('rud');
+        let email = localStorage.getItem('email');
+       
+        if (nombre != null) {
+          $('#user-name').text(nombre);
+          $('#user-data span').text(nombre);          
+          $('#user-data small.email').text(email);
+          $('#user-data small.rud').text(rud);
+
+        }
+        $('#logout').click(()=>{
+          localStorage.removeItem('nombre');
+          window.location.href = "/";
+        })
+      </script>
     </nav>
