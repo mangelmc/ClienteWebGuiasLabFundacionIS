@@ -133,12 +133,7 @@ $(document).ready(()=>{
 
     $('.addPreg').click(e => {
         e.preventDefault();
-        //console.log(e.target.id);
-        $('#guiaid').val(e.target.id);
-        
-        
-        
-        
+        $('#guiaid').val(e.currentTarget.id);   
         $('#modal-info').modal('show');
     })
 
