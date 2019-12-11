@@ -22,6 +22,7 @@ $(document).ready(()=>{
         })
         //<<<<<<<<
     });
+
     const Toast = Swal.mixin({
         toast: true,
         position: 'top-end',
@@ -30,10 +31,7 @@ $(document).ready(()=>{
     });
     
     $('.calificacioni').focusout(e=>{
-        //console.log(e.target.id);
-        //console.log(e.target.value );
         if (califs[e.target.id] == e.target.value) {
-            //console.log('same');
             return; 
         }
         if (e.target.value == '' || +e.target.value > +$(e.target).attr('max') || +e.target.value < 0 ) {
@@ -43,19 +41,16 @@ $(document).ready(()=>{
             })
             e.target.value = califs[e.target.id] ;     
             return;
-        }
-        
+        }        
         data = {
             calificacion: e.target.value
-        }
-        //var config = require('./config');
+        }        
         $.ajax({
             type: "Patch",
-            url: "http://localhost:8000/api/respuestas/" + e.target.id,//e.target.id,
+            url: "http://localhost:8000/api/respuestas/" + e.target.id,
             data,
             cache: false,
             dataType: "json",
-            //contentType: 'application/json; charset=utf-8',//multipart/form-data, or text/plain
             headers:{
                 authorization: localStorage.getItem('authorization')||'bearer ',
                 
@@ -122,9 +117,11 @@ $(document).ready(()=>{
                         title: data.message
                     }) 
                     .then(()=>{
-                        let docente = new URLSearchParams(location.search).get('docente'); 
+                        let url = new URLSearchParams(location.search);
+                        let docente = url.get('docente');
+                        let curso = url.get('curso'); 
                         let idEstudiante = $('#idEstudiante').text();
-                        location.replace('http://' + location.host + '/estudiantes/' + idEstudiante + '?docente=' + docente);
+                        location.replace('http://' + location.host + '/estudiantes/' + idEstudiante + '?docente=' + docente +'&curso='+curso);
                     });
                     
                 })
@@ -140,9 +137,11 @@ $(document).ready(()=>{
                     timer: 3000
                 }) 
                 .then(()=>{
-                    let docente = new URLSearchParams(location.search).get('docente'); 
+                    let url = new URLSearchParams(location.search);
+                    let docente = url.get('docente');
+                    let curso = url.get('curso');  
                     let idEstudiante = $('#idEstudiante').text();                    
-                    location.replace('http://' + location.host + '/estudiantes/' + idEstudiante + '?docente=' + docente);
+                    location.replace('http://' + location.host + '/estudiantes/' + idEstudiante + '?docente=' + docente+'&curso='+curso);
                 })
             }
         })

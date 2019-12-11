@@ -60,9 +60,9 @@
         </div>
       <%}
       else{
-        if(result.messageL){  %>
+        if(result.messageL || result.messageR){  %>
           <div class="callout callout-info">
-            <h4><%= result.messageL %>!</h4>            
+            <h4><%= result.messageL || result.messageR %>!</h4>            
           </div>
         <%}else{
           var est = result.laboratorio.estudiante;

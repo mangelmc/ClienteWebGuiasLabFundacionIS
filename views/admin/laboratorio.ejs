@@ -65,16 +65,15 @@
         </div>
       <%}
       else{
-        if(result.messageL){  %>
+        if(result.messageL || result.messageR){  %>
           <div class="callout callout-info">
-            <h4><%= result.messageL %>!</h4>            
+            <h4><%= result.messageL || result.messageR %>!</h4>            
           </div>
         <%}else{
           var est = result.laboratorio.estudiante;
           var curso = result.laboratorio.guia.curso;
           var guia = result.laboratorio.guia;
-          var data = result.data
-          let calificacion = 0%>  
+          var data = result.data%>  
           <div class="col-xs-12 col-sm-10 col-md-10 col-sm-offset-1 col-lg-10 col-md-offset-1 ">
             <div class="box box-primary">
               <div class="box-body h5">
@@ -98,8 +97,6 @@
                 </ul>
               </div>
             </div>
-              
-            
           </div>
           <div class="col-xs-12 col-sm-10 col-md-10 col-sm-offset-1 col-lg-10 col-md-offset-1 ">
             <div class="box box-info">
@@ -109,7 +106,8 @@
               </div>
             </div>          
           </div>          
-          <%for(var i = 0,len = data.length;i < len; i++){%> 
+          
+            <%for(var i = 0,len = data.length;i < len; i++){%> 
             <div class="col-xs-12" >        
               <div class="box box-success">
                 <div class="box-header with-border">
@@ -136,14 +134,17 @@
               </div>
               
             </div>
-          <%}%> 
+            <%}%>
+          
+          
           <div class="col-xs-12">
             
             <a href="/admin/laboratorios" class="btn btn-primary guardar"><i class="fas fa-arrow-left" ></i> Volver a Laboratorios</a>   
           </div>
           
         <%}%> 
-      <%}%>  
+      <%}%>
+        
       </div>   
     </section>
     <!-- /.content -->

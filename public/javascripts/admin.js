@@ -2,28 +2,24 @@ $(document).ready(()=>{
     console.log('ok admin');
     
     $('#formUsuario').submit(e => {
-        e.preventDefault();
-        
+        e.preventDefault();        
         let form,obj = {};
         form = new FormData(e.target);
         form.forEach((value,key)=>{
             obj[key] = value;
-        })
-       
+        })       
        $.ajax({
                 type: "post",
                 url: "http://localhost:8000/api/usuarios",
                 data: obj,
                 cache: false,
                 dataType: "json",
-                //contentType: 'application/json; charset=utf-8',//multipart/form-data, or text/plain
                 headers:{
                     authorization: localStorage.getItem('authorization')||'bearer ',
-                    
                 }
             })            
             .done(function(result) {
-                console.log( "success" ,result);
+                
                 $('#alertOkText').text(result.message || 'Peticion correcta');
                 $('#alertOk').slideDown();
                 setTimeout(()=>{

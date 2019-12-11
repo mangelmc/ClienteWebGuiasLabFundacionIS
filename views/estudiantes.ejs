@@ -117,7 +117,7 @@
                         <td><%=data[i].curso.materia.sigla%> G<%=data[i].curso.grupo%></td>
                         <td><%=data[i].nota%></td>
                         <td>
-                          <a href="/estudiantes/<%=data[i].estudiante._id%>?docente=<%= query.docente%>" type="button" class="btn  btn-success  btn-sm" title="Mas info">
+                          <a href="/estudiantes/<%=data[i].estudiante._id%>?docente=<%= query.docente%>&curso=<%=data[i].curso._id%>" type="button" class="btn  btn-success  btn-sm" title="Mas info">
                             <i class="fas fa-info" ></i>
                           </a>  
                           <a href="#" type="button" class="btn  btn-danger btn-sm">

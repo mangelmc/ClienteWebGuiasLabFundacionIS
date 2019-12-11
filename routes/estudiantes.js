@@ -29,15 +29,16 @@ router.get('/', function(req, res, next) {
 router.get('/:id', function(req, res) {
   
   //console.log(req.query);
+  let curso = ''
+  if (req.query.curso != undefined && req.query.curso != '') {
+    curso = '?curso='+req.query.curso;
+  }
   if (req.query.docente != undefined && req.query.docente != '') {
-    fetch('http://localhost:8000/api/integrantes/' + req.params.id)
+    fetch('http://localhost:8000/api/integrantes/' + req.params.id + curso)
     .then(result => {
-      //console.log('result',result);
       return result.json();
     })
     .then(result => {
-      
-      //console.log('json', result);
       res.render('estudiante', { title: 'Estudiante' ,result:result,query:req.query});
       
     })

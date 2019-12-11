@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title><%= title %></title>
   <%-include("partials/headImports") -%>
+  <script src="/javascripts/estudiante.js"></script>
 
 
 </head>
@@ -90,18 +91,7 @@
                           <li class="list-group-item">
                             <b>R.U.</b> <span class="pull-right"><%= result.usuario.rud %></span>
                           </li>
-                          <!-- <li class="list-group-item "><b class="text-center" >Laboratorios : </b>
-    
-                          </li>
-                          <li class="list-group-item">
-                            <b>Realizados</b> <span class="pull-right">10</span>
-                          </li>
-                          <li class="list-group-item">
-                            <b>Pendientes</b> <span class="pull-right">10</span>
-                          </li>
-                          <li class="list-group-item">
-                            <b>Faltas</b> <span class="pull-right">10</span>
-                          </li> -->
+                          
           
                         </ul>
                       </div>
@@ -111,58 +101,64 @@
                 </div>
               </div>
             </div>
-            <%if(result.messageL){%>
+            <%if(result.messageC){%>
               <div class="callout callout-info">
-                <h4><%= result.messageL %>!</h4>            
+                <h4><%= result.messageC %>!</h4>            
               </div>
             <%  
             }else{%>
-              <div class="box box-primary box-solid">
-                <div class="box-header "> 
-                  <h3 class="box-title with-border "><i class="fas fa-calendar-check"></i> <b class="hidden-sm hidden-xs">LABORATORIOS REALIZADOS</b></h3>
+
+              <%
+              var data = result.integrantes;
+              for(var i = 0,len = data.length; i < len;i++){%>
+             
+                
+              <div class="box box-primary box-solid collapsed-box">
+                <div class="box-header with-border">
                   
-                </div> 
-                <!-- /.box-header -->    
-                <div class="box-body table-responsive">
-                  <table id="example2" class="table table-bordered table-hover table-striped">
-                    <thead>
-                    <tr>
-                      <th>LABORATORIO</th>
-                      <th>ESTADO</th>
-                      <th>FECHA</th>
-                      <th>NOTA</th>
-                      <th>ACCIONES</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                      <%
-                      var data = result.data;
-                      for(var i = 0,len = data.length; i < len;i++){%>
-                      <tr>
-                        <td>Laboratorio N° <%=data[i].guia.numero%></td>
-                        <td><%=data[i].estado.toUpperCase()%></td>
-                        <td><%=data[i].fechaRegistro.substr(0,10)%></td>
-                        <td><%=data[i].nota%></td>
-                        <td>
-                          <%if(data[i].estado != "revisado"){%> 
-                          <!-- Revisar si se puede revisar aun estando pendiente el Laboratorio -->
-                           <a href="/laboratorios/<%=data[i]._id%>?docente=<%= query.docente%>&tipo=rev" type="button" class="btn  btn-success  btn-sm" title="Revisar">
-                            <i class="fas fa-file-signature" ></i>
-                          </a>                           
-                          
-                          <%}%>
-                          <a href="/laboratorios/<%=data[i]._id%>?docente=<%= query.docente%>&tipo=det" type="button" class="btn  btn-primary btn-sm" title="Detalles">
-                            <i class="fas fa-info" ></i></a>
-                            
-                        </td>
-                      </tr>   
-                      <%}%>                            
-                    </tbody> 
-                  </table>
+                  <h2 class="box-title text-bold ">
+                    <i class="fas fa-users"></i>
+                     Laboratorios <%=data[i].curso.materia.nombre%> <%=data[i].curso.materia.sigla%> <%=data[i].curso.gestion%> G<%=data[i].curso.grupo%>
+                    </h2>
+    
+                  <div class="box-tools pull-right">                  
+                    <button type="button" id="<%=data[i].curso._id%>" class="btn btn-box-tool btnlab" data-widget="collapse"><i class="fa fa-plus"></i>
+                    </button>
+                  </div>            
+                  <!-- /.box-tools -->
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body" >                  
+                  <div class="callout callout-info" id="b<%=data[i].curso._id%>" style="display: none">
+                    <h4 >No Hay Laboratorios para mostrar</h4>
+                    <p id="textEst"></p>
+                  </div>
+                  <div class="box" id="tb<%=data[i].curso._id%>" style="display: none">
+                    <div class="box-header"> 
+                    </div> 
+                    <!-- /.box-header -->
+                    <div class="box-body table-responsive">
+                      <table id="example2" class="table table-bordered table-hover table-striped">
+                        <thead>
+                        <tr>
+                          <th>Guia Nro</th>
+                          <th>ESTADO</th>
+                          <th>NOTA</th>
+                          <th>ACCIONES</th>
+                        </tr>
+                        </thead>
+                        <tbody id="t<%=data[i].curso._id%>" style="display: none">
+                                                      
+                        </tbody> 
+                      </table>
+                    </div>
+                    <!-- /.box-body -->
+                    </div>
+                    <!-- /.box -->
                 </div>
                 <!-- /.box-body -->
               </div>
-              <!-- /.box -->
+              <%}%>
             <%}%> 
           <%}%>
           
@@ -177,15 +173,7 @@
 
   
   <%-include("partials/footer") -%>
-  <!-- Control Sidebar -->
-  <aside class="control-sidebar control-sidebar-dark">
-
-  </aside>
-  <!-- /.control-sidebar -->
-  <!-- Add the sidebar's background. This div must be placed
-  immediately after the control sidebar -->
-  <div class="control-sidebar-bg"></div>
-
+  
 
 </div>
 

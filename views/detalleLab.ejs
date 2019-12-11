@@ -64,9 +64,9 @@
         </div>
       <%}
       else{
-        if(result.messageL){  %>
+        if(result.messageL || result.messageR){  %>
           <div class="callout callout-info">
-            <h4><%= result.messageL %>!</h4>            
+            <h4><%= result.messageL || result.messageR %>!</h4>            
           </div>
         <%}else{
           var est = result.laboratorio.estudiante;
@@ -159,9 +159,9 @@
               </div>            
             </div>
           </div>
-          <div class="col-xs-12 col-md-4 col-md-offset-0 text-center" style="padding-top: 3rem" > 
-              <a class="btn btn-lg btn-success" href="/estudiantes/<%= est._id %>?docente=<%= query.docente%>" ><i class="fas fa-arrow-left"></i> VOLVER</a>
-          </div>
+          <!-- <div class="col-xs-12 col-md-4 col-md-offset-0 text-center" style="padding-top: 3rem" > 
+              <a class="btn btn-lg btn-success" href="/estudiantes/<%= est._id %>?docente=<%= query.docente%>&curso=<%= query.curso%>" ><i class="fas fa-arrow-left"></i> VOLVER</a>
+          </div> -->
         <%}%> 
       <%}%>  
       </div>   

@@ -19,13 +19,16 @@ $(document).ready(()=>{
                 })            
                 .done(function(result) {
                     console.log( "success" ,result);
-                    let html = '',p1 = '<option value="',p2 = '">', p3 = '</option>';
+                    let html = '',p0 = '<option data-did="',p1= '" data-dno="',p2 = '" value="',p3 = '">', p4 = '</option>';
                     let data = result.data;
+
                     if (data.length > 0) {
+                        $('#ndocente').val(data[0].docente.nombre);
+                        $('#docente').val(data[0].docente._id);
                         data.forEach((value,key)=>{
                             //obj[key] = value;
                             //console.log(value,key);
-                            html += p1 + value._id + p2 + value.materia.nombre + ' '+ value.materia.sigla + ' G-'+ value.grupo + p3;
+                            html += p0 + value.docente._id + p1 + value.docente.nombre + p2 + value._id + p3 + value.materia.nombre + ' '+ value.materia.sigla + ' ' + value.gestion + ' G-'+ value.grupo + p4;
                         })
                         $('#scurso').html(html);
                     }else{
@@ -41,48 +44,20 @@ $(document).ready(()=>{
                         $('#alertError').slideUp();
                         
                     },4000); */
-                    console.log( "status" ,status);
+                    //console.log( "status" ,status);
                 })
-            $.ajax({
-                    type: "get",
-                    url: "http://localhost:8000/api/usuarios?tipo=docente",
-                    //data: obj,
-                    cache: false,
-                    dataType: "json",
-                    //contentType: 'application/json; charset=utf-8',//multipart/form-data, or text/plain
-                    headers:{
-                        authorization: localStorage.getItem('authorization')||'bearer ',
-                        
-                    }
-                })            
-                .done(function(result) {
-                    console.log( "success" ,result);
-                    let html = '',p1 = '<option value="',p2 = '">', p3 = '</option>';
-                    let data = result;
-                    if (data.length > 0) {
-                        data.forEach((value,key)=>{
-                            //obj[key] = value;
-                            //console.log(value,key);
-                            html += p1 + value._id + p2 + value.nombre + p3;
-                        })
-                        $('#sdocente').html(html);
-                    }else{
-                        $('#sdocentealert').fadeIn('slow');
-                    }
-                
-                })
-                .fail(function(err,status) {
-                    console.log( "error" ,err);
-                    //$('#alertErrorText').text(err.responseJSON.message || err.responseJSON.error || 'Error inesperado');
-                    //$('#alertError').slideDown();
-                    /* setTimeout(()=>{
-                        $('#alertError').slideUp();
-                        
-                    },4000); */
-                    console.log( "status" ,status);
-                })
+            
         }
     })
+    $('#scurso').change((e)=>{
+        //console.log(e.currentTarget);
+        //console.log($('#scurso').children("option:selected").data('dno'));
+        //console.log($('#scurso').children("option:selected").data('did'));
+        
+        $('#ndocente').val($('#scurso').children("option:selected").data('dno'));
+        $('#docente').val($('#scurso').children("option:selected").data('did'));
+    });
+    
 
     
 
@@ -112,8 +87,8 @@ $(document).ready(()=>{
                 $('#alertOk').slideDown();
                 setTimeout(()=>{
                     $('#alertOk').slideUp();
-                    
-                },5000);
+                    location.reload();
+                },4000);
                 
                 
                

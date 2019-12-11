@@ -34,7 +34,7 @@ $(document).ready(()=>{
                 const t2 = '</td><td>';
                 const t3 =  '</td></tr>';
                 const a1 = '<a href="/estudiantes/';
-                const a2 = '?docente='+ docente +'" type="button" class="btn btn-success btn-sm"><i class="fas fa-info" ></i></a>';
+                const a2 = '?docente='+ docente + '&curso='+ idCurso +'" type="button" class="btn btn-success btn-sm"><i class="fas fa-info" ></i></a>';
                 const a3 = '<button type="button" class="btn  btn-danger btn-sm"><i class="fas fa-user-lock" ></i></button>';
                 let html = '';
 

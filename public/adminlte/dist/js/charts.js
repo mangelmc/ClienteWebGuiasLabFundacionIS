@@ -28,8 +28,8 @@ return false;*/
   //2.8.0
   //var ctx = document.getElementById('myChart');
   //var ctx = document.getElementById('pieChart').getContext('2d');
+
   var ctx = $('#pieChart');
-  //var ctx = 'myChart';
   
   var myChart = new Chart(ctx, {
     type: 'doughnut',
@@ -52,9 +52,7 @@ return false;*/
       animation : {
         animateScale:true,
         animateRotate:true
-      }
-      
-  
+      }  
     }
   });
 

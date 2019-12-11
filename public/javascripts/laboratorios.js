@@ -288,14 +288,18 @@ $(document).ready(()=>{
                     if (data.length > 0) {
                         data.forEach((value,key)=>{
                             
-                            insRespuestas(labId,value._id)
-                        })
-                       
-                        window.location.assign("/admin/laboratorios/"+ labId);
+                            insRespuestas(labId,value._id);
+                        });
+                        setTimeout(()=>{
+                            window.location.href = "/admin/laboratorios/"+ labId;
+                            
+                        },4000);
+                        
 
                     }else{
                         $('#sguiaalert').fadeIn('slow');
-                        location.reload();
+                        console.log('error length');
+                        //location.reload();
                     }
                 
                 })
@@ -303,7 +307,7 @@ $(document).ready(()=>{
                     console.log( "error" ,err);
                     $('#sguiaalert div').fadeIn('slow');
                     $('#sguia').html('');
-                    location.reload();
+                    //location.reload();
 
                     
                 })
