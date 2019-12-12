@@ -1,6 +1,61 @@
 $(document).ready(()=>{
     console.log('ok estudiante');
 
+    let searchParams = new URLSearchParams(window.location.search);        
+    //searchParams.has('sent') // true
+    let idCurso = searchParams.get('curso');
+    var idEstudiante = window.location.pathname.split( '/' )[2];
+    console.log(idEstudiante);
+    //var config = require('./config');
+    $.ajax({
+            type: "Get",
+            url: "http://localhost:8000/api/laboratorios/estadistica/" + idEstudiante +"?curso=" + idCurso,
+            
+            cache: false,
+            dataType: "json",
+            headers:{
+                authorization: localStorage.getItem('authorization')||'bearer ',
+                
+            }
+        })            
+        .done(function(result) {
+            console.log( "success" ,result);
+            let li1 = `<li class="list-group-item"><b>`;
+            let li2 = `</b> <span class="pull-right">`
+            let li3 = `</span></li>`;
+            let rev = 0,pen= 0;
+            let data = result.labs;
+            //console.log(data);
+            for (let index = 0; index < data.length; index++) {
+                if (data[index].estado=='revisado') {
+                    rev++ 
+                }
+                if (data[index].estado=='pendiente') {
+                    pen++
+                }
+            }
+            let html = li1 + 'Laboratorios Revisados ' + li2 + rev +li3;
+            html += li1 + 'Laboratorios por Revisar ' + li2 + pen +li3;
+            html += li1 + 'Total Laboratorios realizados ' + li2 + data.length +li3;
+            html += li1 + 'Total Guias Curso ' + li2 + result.guias +li3;
+
+        
+            $('#lista').append(html);
+            //$('#t' + idCurso).html(html).show('slow');
+            
+        })
+        .fail(function(err,status) {
+            console.log( "error" ,err);
+            
+            $('#b'+ idCurso + 'p').text(err.responseJSON.message || err.responseJSON.error || 'error');
+            $('#b'+ idCurso).show('slow');
+            console.log( "status" ,status);
+        })
+        .always(function() {
+            console.log( "complete" );
+        });
+        
+
     $('.btnlab').click(e=>{
         console.log($(e.currentTarget).children('i').hasClass('fa-minus'));
         

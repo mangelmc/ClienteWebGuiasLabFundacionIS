@@ -14,7 +14,7 @@ router.get('/', function(req, res) {
     .then(result => {
       
       
-      console.log('json', result);
+      //console.log('json', result);
       
       res.render('admin/guias', { title: 'Guias' ,result:result});
       
