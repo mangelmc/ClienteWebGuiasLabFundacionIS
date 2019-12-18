@@ -58,255 +58,193 @@
         </div>
       <% } else {%>
         <div class="col-xs-12">
-          <div class="box box-primary box-solid collapsed-box">
-            <div class="box-header with-border">
-              
-              <h2 class="box-title text-bold "><i class="fas fa-users"></i> ESTUDIANTES </h2>
+          <div class="nav-tabs-custom">
+            <ul class="nav nav-tabs">
+              <li class="active ">
+                <a href="#tab_1" data-toggle="tab" aria-expanded="true" id="estudiantes">
+                  <i class="fas fa-users"></i> ESTUDIANTES </h2>
+                </a>
+              </li>
+              <li class="">
+                <a href="#tab_2" data-toggle="tab" aria-expanded="false" id="guias">
+                  <i class="fas fa-book"></i> GUIAS</h2>
+                </a>
+              </li>
+              <li class="">
+                <a href="#tab_3" data-toggle="tab" aria-expanded="false" id="archivos">
+                  <i class="fas fa-file"></i> ARCHIVOS</i></h2>
+                </a>
+              </li>
+              <li class="">
+                <a href="#tab_4" data-toggle="tab" aria-expanded="false" id="estadisticas"> 
+                  <i class="fas fa-digital-tachograph"></i> ESTADISTICAS
+                </a>
+              </li>
 
-              <div class="box-tools pull-right">                  
-                <button type="button" id="estudiantes" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i>
-                </button>
-              </div>            
-              <!-- /.box-tools -->
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body" >
-              
-              <div class="callout callout-info" id="bodyEst" style="display: none">
-                <h4 >No Hay Estudiantes para mostrar</h4>
-                <p id="textEst"></p>
-              </div>
-              <div class="box" id="tableEst" style="display: none">
-                <div class="box-header"> 
-                  
-                  <div class="box-tools pull-right">                         
-                    <div class="input-group input-group-sm" style="width: 45vw;">
-                      <div class="input-group-btn">
-                        <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-expanded="true">Criterio
-                          <span class="fa fa-caret-down"></span></button>
-                        <ul class="dropdown-menu">
-                          <li><a href="#">Nombres y Apellidos</a></li>
-                          <li><a href="#">R. U.</a></li>
-                          <li><a href="#">C. I.</a></li>
-                        </ul>
-                      </div>
-                      <input type="text" name="table_search" class="form-control pull-right" placeholder="Buscar Estudiante">
-    
-                      <div class="input-group-btn">                            
-                        <button type="submit" class="btn btn-warning"><i class="fas fa-search"></i></button>
-                      </div>
-                      
+            </ul>
+            <div class="tab-content">
+              <div class="tab-pane active" id="tab_1">
+                <div class="box box-primary ">
+            
+                  <!-- /.box-header -->
+                  <div class="box-body" >
+                    
+                    <div class="callout callout-info" id="bodyEst" style="display: none">
+                      <h4 >No Hay Estudiantes para mostrar</h4>
+                      <p id="textEst"></p>
                     </div>
+                    <div class="" id="tableEst" style="display: none">
+                      <div class="box-header"> 
+                        
+                       
+                      </div> 
+                      <!-- /.box-header -->
+                      <div class="box-body">
+                        <table id="example2" class="table table-bordered table-hover table-striped">
+                          <thead>
+                          <tr>
+                            <th>Nombres y Apellidos</th>
+                            <th>CI</th>
+                            <th>RU</th>
+                            <th>Acciones</th>
+                          </tr>
+                          </thead>
+                          <tbody id="tEstudiantes" style="display: none">
+                                                        
+                          </tbody> 
+                        </table>
+                      </div>
+                      <!-- /.box-body -->
+                      </div>
+                      <!-- /.box -->
                   </div>
-                </div> 
-                <!-- /.box-header -->
-                <div class="box-body">
-                  <table id="example2" class="table table-bordered table-hover table-striped">
-                    <thead>
-                    <tr>
-                      <th>Nombres y Apellidos</th>
-                      <th>CI</th>
-                      <th>RU</th>
-                      <th>Acciones</th>
-                    </tr>
-                    </thead>
-                    <tbody id="tEstudiantes" style="display: none">
-                                                  
-                    </tbody> 
-                  </table>
+                  <!-- /.box-body -->
                 </div>
-                <!-- /.box-body -->
-                </div>
-                <!-- /.box -->
-            </div>
-            <!-- /.box-body -->
-          </div>
-          <!-- /.box -->
-          <div class="box box-success box-solid collapsed-box">
-            <div class="box-header with-border">
-              
-              <h2 class="box-title text-bold "> <i class="fas fa-book"></i> GUIAS</h2>
-
-              <div class="box-tools pull-right">                  
-                <button type="button" id="guias"  class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i>
-                </button>
-              </div> 
+              </div>
+              <!-- /.tab-pane -->
+              <div class="tab-pane" id="tab_2">
+                <div class="box box-success">
+                  <div class="box-header with-border">
+                    
+                  </div>
+                  <!-- /.box-header -->
+                  <div class="box-body" >
+                    <div class="callout callout-success" id="bodyGuia" style="display: none">
+                        <h4 >No Hay Guias para mostrar</h4>
+                        <p id="textGuia"></p>
+                      </div>
+                    <div class="box" id="tableGuia" style="display: none">              
+                      
+                      <div class="box-body">
+                        <table id="example2" class="table table-bordered table-hover table-striped">
+                          <thead>
+                          <tr>
+                            <th>N° GUIA </th>
+                            <th>DESCRIPCION</th>
+                            <th>FECHA</th>
                             
-              <!-- /.box-tools -->
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body" >
-              <div class="callout callout-success" id="bodyGuia" style="display: none">
-                  <h4 >No Hay Guias para mostrar</h4>
-                  <p id="textGuia"></p>
-                </div>
-              <div class="box" id="tableGuia" style="display: none">              
-                <div class="box-header"> 
-                    
-                  <div class="box-tools pull-right"> 
-                      
-                    <div class="input-group input-group-sm" style="width: 45vw;">
-                      <div class="input-group-btn ">
-                        <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-expanded="true">Criterio
-                          <span class="fa fa-caret-down"></span></button>
-                        <ul class="dropdown-menu">
-                          <li><a href="#">Numero</a></li>
-                          <li><a href="#">Descripcion</a></li>
-                          <li><a href="#">Otro Campo</a></li>
-                        </ul>
+                            <th>ACCIONES</th>
+                          </tr>
+                          </thead>
+                          <tbody id="tGuias" style="display: none">                       
+                          </tbody> 
+                        </table>
                       </div>
-                      <input type="text" name="table_search" class="form-control pull-right" placeholder="Buscar Guia">
-    
-                      <div class="input-group-btn">
-                          
-                        <button type="submit" class="btn btn-success"><i class="fas fa-search"></i></button>
-                      </div>                            
+                      <!-- /.box-body -->
                     </div>
+                    <!-- /.box -->
                   </div>
-                </div> 
-                <!-- /.box-header -->
-                <div class="box-body">
-                  <table id="example2" class="table table-bordered table-hover table-striped">
-                    <thead>
-                    <tr>
-                      <th>N° GUIA </th>
-                      <th>DESCRIPCION</th>
-                      <th>FECHA</th>
-                      
-                      <th>ACCIONES</th>
-                    </tr>
-                    </thead>
-                    <tbody id="tGuias" style="display: none">                       
-                    </tbody> 
-                  </table>
+                  <!-- /.box-body -->
                 </div>
-                <!-- /.box-body -->
               </div>
-              <!-- /.box -->
+              <!-- /.tab-pane -->
+              <div class="tab-pane" id="tab_3">
+                <div class="box box-info ">
+                  <div class="box-header ">
+                    
+                    
+                  </div>
+                  <!-- /.box-header -->
+                  <div class="box-body" >
+                    <div class="callout callout-warning" id="bodyArc" style="display: none">
+                      <h4 >No Hay archivos para mostrar</h4>
+                      <p id="textArc"></p>
+                    </div>
+                    <div class="box" id="tableArc" style="display: none">              
+                      
+                      <div class="box-body">
+                        <table id="example2" class="table table-bordered table-hover table-striped">
+                          <thead>
+                          <tr>
+                            <th>N° GUIA Asociado </th>
+                            <th>Nombre</th>
+                            
+                            
+                            <th>ACCIONES</th>
+                          </tr>
+                          </thead>
+                          <tbody id="tArchivos" style="display: none">                       
+                          </tbody> 
+                        </table>
+                      </div>
+                      <!-- /.box-body -->
+                    </div>
+                    <!-- /.box -->
+                  </div>
+                  <!-- /.box-body -->
+                </div>
+              </div>
+              <!-- /.tab-pane -->
+              <div class="tab-pane" id="tab_4">
+                <div class="col-xs-12 " id="bodyChart" style="display: none">
+                  <div class="callout callout-warning">
+                    <h4 >No hay estadisticas para mostrar</h4>
+                    <p id="textChart"></p>
+                  </div>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4" id="bodyPie" style="display: none">
+                  <!-- DONUT CHART -->
+                  <div class="box box-warning box-solid">
+                    <div class="box-header with-border">
+                      <h3 class="box-title ">Promedio Laboratorios revisados</h3>
+                    </div>
+                    <div class="box-body" >
+                      <canvas id="pieChart" style="height:250px;width: 250px"></canvas>
+                    </div>
+                    <!-- /.box-body -->
+                  </div>
+                  <!-- /.box -->
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8" id="bodyBar" style="display: none">
+                  <!-- BAR CHART -->
+                  <div class="box box-danger box-solid">
+                    <div class="box-header with-border">
+                      <h3 class="box-title">Detalle revision por laboratorio </h3>
+                    </div>
+                    <div class="box-body" >
+                     
+                      <div class="chart">
+                        <canvas id="barChart" style="height:300px;width: 300px"></canvas>
+                      </div>
+                    </div>
+                    <!-- /.box-body -->
+                  </div>
+                  <!-- /.box -->
+                </div>
+              </div>
+              <!-- /.tab-pane -->
             </div>
-            <!-- /.box-body -->
-          </div>
-          <div class="box box-info box-solid collapsed-box">
-            <div class="box-header with-border ">
-              
-              <h2 class="box-title text-bold "><i class="fas fa-file"></i> ARCHIVOS</i></h2>
+            <!-- /.tab-content -->
 
-              <div class="box-tools pull-right">                  
-                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i>
-                </button>
-              </div> 
-                                    
-              <!-- /.box-tools -->
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body" >
-              <div class="callout callout-warning" id="bodyArc" >
-                <h4 >No Hay archivos para mostrar</h4>
-                <p id="textArc"></p>
-              </div>
-              <div class="box" id="tableArc" >
-                <div class="box-header"> 
-                    
-                  <div class="box-tools pull-right">
-                    <div class="input-group input-group-sm" style="width: 45vw;">
-                      <div class="input-group-btn ">
-                        <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-expanded="true">Criterio
-                          <span class="fa fa-caret-down"></span></button>
-                        <ul class="dropdown-menu">
-                          <li><a href="#">Nombre</a></li>
-                          <li><a href="#">Extension</a></li>
-                          <li><a href="#">Otro campo</a></li>
-                        </ul>
-                      </div>
-                      <input type="text" name="table_search" class="form-control pull-right" placeholder="Buscar Estudiante">
-    
-                      <div class="input-group-btn">
-                          
-                        <button type="submit" class="btn btn-info"><i class="fas fa-search"></i></button>
-                      </div>
-                      
-                    </div>
-                  </div>
-                </div> 
-                <!-- /.box-header -->
-                <div class="box-body">
-                  <table id="example2" class="table table-bordered table-hover table-striped" >
-                    <thead>
-                    <tr>
-                      <th>NOMBRE ARCHIVO</th>
-                      <th>DESCRIPCION</th>
-                      <th>FECHA</th>
-                      <th>OTRO CAMPO</th>
-                      <th>ACCIONES</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                      <%for(var i = 1; i< 10;i++){%>
-                      <tr>
-                        <td>Archivo <%=i%>.ext<%=i%></td>
-                        <td>Descripcion archivo <%=i%></td>
-                        <td>0<%=i%>/0<%=i%>/2019</td>
-                        <td>Detalle Campo <%=i%></td>
-                        <td>                            
-                          <button type="button" class="btn  btn-primary btn-sm">
-                            <i class="fas fa-info" ></i></button>
-                            <button type="button" class="btn  btn-success  btn-sm">
-                                <i class="fas fa-edit" ></i>
-                            </button>
-                            <button type="button" class="btn  btn-danger  btn-sm">
-                                <i class="fas fa-trash" ></i>
-                            </button>
-                        </td>
-                      </tr>   
-                      <%}%>                            
-                    </tbody> 
-                  </table>
-                </div>
-                <!-- /.box-body -->
-              </div>
-              <!-- /.box -->
-            </div>
-            <!-- /.box-body -->
           </div>
+          
+          
+          
         </div>
         <!-- /.col -->
 
         
-        <div class="col-xs-12 " id="bodyChart" style="display: none">
-          <div class="callout callout-warning">
-            <h4 >No hay estadisticas para mostrar</h4>
-            <p id="textChart"></p>
-          </div>
-        </div>
-        <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4" id="bodyPie" style="display: none">
-          <!-- DONUT CHART -->
-          <div class="box box-warning box-solid">
-            <div class="box-header with-border">
-              <h3 class="box-title ">Promedio Laboratorios revisados</h3>
-            </div>
-            <div class="box-body" >
-              <canvas id="pieChart" style="height:250px;width: 250px"></canvas>
-            </div>
-            <!-- /.box-body -->
-          </div>
-          <!-- /.box -->
-        </div>
-        <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8" id="bodyBar" style="display: none">
-          <!-- BAR CHART -->
-          <div class="box box-danger box-solid">
-            <div class="box-header with-border">
-              <h3 class="box-title">Detalle revision por laboratorio </h3>
-            </div>
-            <div class="box-body" >
-             
-              <div class="chart">
-                <canvas id="barChart" style="height:300px;width: 300px"></canvas>
-              </div>
-            </div>
-            <!-- /.box-body -->
-          </div>
-          <!-- /.box -->
-        </div>
+        
         <% }%>  
 
 

@@ -26,7 +26,19 @@ router.get('/:id', function(req, res) {
         return res.render('revisarLab', { title: 'Revision de laboratorio' ,result:result,query:req.query});
         
       }
-      res.render('detalleLab', { title: 'Detalle de laboratorio' ,result:result,query:req.query});
+      if (req.query.tipo == 'file') {
+        return res.render('revisarLabFile', { title: 'Revision de laboratorio' ,result:result,query:req.query});
+        
+      }
+      if (req.query.tipo == 'det') {
+        return res.render('detalleLab', { title: 'Detalle de laboratorio' ,result:result,query:req.query});
+        
+      }
+      if (req.query.tipo == 'filedet') {
+        return res.render('detalleLabFile', { title: 'Detalle de laboratorio' ,result:result,query:req.query});
+        
+      }
+      
       
     })
     .catch(err => {

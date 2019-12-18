@@ -67,7 +67,7 @@ $(document).ready(()=>{
             Object.keys(califs).forEach((key,index) => {
                 suma += +califs[key];
             });
-            //console.log(suma);
+            console.log(suma);
             $('.confirmarCalificacion').show()
             $('#calificacionTotal').text(suma + ' / 100');
             $('#calificacionColor').removeClass('bg-aqua').removeClass('bg-red');
@@ -119,9 +119,10 @@ $(document).ready(()=>{
                     .then(()=>{
                         let url = new URLSearchParams(location.search);
                         let docente = url.get('docente');
-                        let curso = url.get('curso'); 
-                        let idEstudiante = $('#idEstudiante').text();
-                        location.replace('http://' + location.host + '/estudiantes/' + idEstudiante + '?docente=' + docente +'&curso='+curso);
+                        let curso = url.get('curso');
+                        window.history.back(); 
+                        //let idEstudiante = $('#idEstudiante').text();
+                        //location.replace('http://' + location.host + '/estudiantes/' + idEstudiante + '?docente=' + docente +'&curso='+curso);
                     });
                     
                 })

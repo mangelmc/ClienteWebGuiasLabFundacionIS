@@ -121,9 +121,10 @@
                         <td><%=data[i].fechaRegistro.substr(0,10)%>%></td>
                         <td><%=data[i].curso.materia.sigla%> G<%=data[i].curso.grupo%></td>
                         <td>
-                          <a href="/guias/<%=data[i]._id%>?docente=<%= query.docente%>" type="button" class="btn  btn-success  btn-sm" title="Mas info">
+                          
+                          <a href="/guias/<%=data[i]._id%>?docente=<%= query.docente%>&tipo=<%=data[i].tipo%>" type="button" class="btn  btn-success  btn-sm" title="Mas info">
                             <i class="fas fa-info" ></i>
-                          </a>  
+                          </a>
                           <a href="#" type="button" class="btn  btn-primary btn-sm">
                             <i class="fas fa-edit" ></i>
                           </a>                          

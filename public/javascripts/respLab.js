@@ -8,34 +8,69 @@ $(document).ready(()=>{
     });
     $('form').submit(e=>{
         e.preventDefault();
-        let data = {respuesta: e.target.respuesta.value};
-       
-        //console.log(e.target.id.value,e.target.respuesta.value);
-        $.ajax({
-            type: "Patch",
-            url: "http://localhost:8000/api/respuestas/" + e.target.id.value,//e.target.id,
-            data,
-            cache: false,
-            dataType: "json",
-            //contentType: 'application/json; charset=utf-8',//multipart/form-data, or text/plain
-            headers:{
-                authorization: localStorage.getItem('authorization')||'bearer ',
+        
+        form = new FormData(e.target);
+        if (form.get('file') === null) {
+            let data = {respuesta: e.target.respuesta.value};
+            $.ajax({
+                type: "Patch",
+                url: "http://localhost:8000/api/respuestas/" + e.target.id.value,//e.target.id,
+                data,
+                cache: false,
+                dataType: "json",
+                //contentType: 'application/json; charset=utf-8',//multipart/form-data, or text/plain
+                headers:{
+                    authorization: localStorage.getItem('authorization')||'bearer ',
+                    
+                }
+            })            
+            .done(function(data) {
+                //console.log( "success" ,data.message);
+                Toast.fire({
+                    type: 'success',
+                    title: data.message
+                });
+            })
+            .fail(function(err,status) {
+                console.log( "error" ,err.responseJSON.error.message);
+                console.log( "status" ,status);
+    
+            })        
+        }else{
+            $.ajax({
+                type: "patch",
+                url: "http://localhost:8000/api/respuestas/file",
                 
-            }
-        })            
-        .done(function(data) {
-            //console.log( "success" ,data.message);
-            Toast.fire({
-                type: 'success',
-                title: data.message
-            });
-        })
-        .fail(function(err,status) {
-            console.log( "error" ,err.responseJSON.error.message);
-            console.log( "status" ,status);
+                dataType: "html",
+                data: form,
+                cache: false,
+                contentType: false,
+                processData: false,
+                //contentType: 'application/json; charset=utf-8',//multipart/form-data, or text/plain
+                headers:{
+                    authorization: localStorage.getItem('authorization')||'bearer ',
+                    
+                }
+            })            
+            .done(function(data) {
+                console.log( "success" ,data);
+                Toast.fire({
+                    type: 'success',
+                    title: data.message
+                });
+            })
+            .fail(function(err,status) {
+                console.log( "error" ,err.responseJSON.error.message);
+                console.log( "status" ,status);
+    
+            })                  
+        }
 
-        })
+
+        
     })
+
+    
 
     $('.calificacioni').focusout(e=>{
         //console.log(e.target.id);

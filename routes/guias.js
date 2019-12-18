@@ -35,8 +35,11 @@ router.get('/:id', function(req, res, next) {
     })
     .then(result => {
       
-      console.log('json', result);
-      res.render('detalleGuia', { title: 'Detalle Guia' ,result:result,query:req.query});
+      console.log('result', result);
+      if (req.query.tipo === 'auto') {
+        return res.render('detalleGuia', { title: 'Detalle Guia' ,result:result,query:req.query});
+      }
+      res.render('detalleGuiaFile', { title: 'Detalle Guia' ,result:result,query:req.query});
       
     })
     .catch(err => {

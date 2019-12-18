@@ -33,7 +33,7 @@
     <section class="content-header">
       <h1 >        
         <span ><i class="fas fa-chalkboard-teacher"></i>DETALLE DE GUIA </span>  
-        <small>Descripcion y preguntas</small>
+        <small>Descripcion en archivo pdf</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="/home?docente=<%= query.docente%>"><i class="fas fa-home"></i>Inicio</a></li>
@@ -69,53 +69,18 @@
         <%}else{
           let guia = result.guia;%>  
           
-          <div class="col-xs-12 col-sm-10 col-md-10 col-sm-offset-1 col-lg-10 col-md-offset-1 ">
+          <div class="col-xs-12 ">
             <div class="box box-info">
               <div class="box-body">
-                  <%- guia.contenidoHtml %>
+                <h2 style="text-align: center;">Guia Nro <%= guia.numero %></h2>
+                  <a target="blank" class="btn btn-success" href="http://localhost:8000/<%= guia.contenidoHtml %>" ><i class="fas fa-file-alt"></i> Ver Archivo en otra pestaña</a>
+                <embed src="http://localhost:8000/<%= guia.contenidoHtml %>" type="application/pdf" width="100%" height="600px" />
+                
               </div>
             </div>          
           </div>
           
-          <%if(result.messageP){%>
-            <div class="col-xs-12">
-            <div class="callout callout-info">
-              <h4><%= result.messageP %>!</h4>            
-            </div>
-          </div>
-          <%}else{
-            var preguntas = result.preguntas;
-            for(var i = 0,len = preguntas.length;i < len; i++){%> 
-            <div class="col-xs-12">        
-              <div class="box box-success">
-                <div class="box-header with-border">
-                  <h3 class="box-title">Pregunta : <%= i+1%></h3>
-                  <!-- /.box-tools -->
-                </div>
-                <!-- /.box-header -->
-                <div class="box-body">
-                  <div class="row">
-                    <div class="col-xs-12 col-sm-offset-1 col-sm-10 col-md-4 col-md-offset-0">
-                      <%- preguntas[i].label %>
-                      <%- preguntas[i].input %>
-
-                    </div>
-                    <div class="col-xs-12 col-sm-offset-1 col-sm-10 col-md-4 col-md-offset-0">
-                      <div><label>Tipo : <%= preguntas[i].tipo %></label></div>
-                      <div><label>Respuesta : <%= preguntas[i].respuesta %></label></div>
-                    </div>
-                    <div class="col-xs-12 col-sm-offset-1 col-sm-10 col-md-4 col-md-offset-0">                      
-                    <label for="calificacioni">Ponderacion: <%= preguntas[i].valorS100 %>/100</label>
-                     
-                    </div>
-                  </div>
-                  
-                </div>
-                <!-- /.box-body -->
-              </div>
-            </div>
-            <%}%>  
-          <%}%>
+          
           <!-- <div class="col-xs-12 col-sm-10 col-md-10 col-sm-offset-1 col-lg-10 col-md-offset-1  text-center" > 
             <a class="btn btn-lg btn-success" href="#" ><i class="fas fa-edit"></i> EDITAR</a>
           </div> -->

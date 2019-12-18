@@ -64,7 +64,7 @@ $(document).ready(()=>{
 
          
     });
-
+    $('#estudiantes').click();
     $('#guias').click(e=>{
         console.log($('#guias i').hasClass('fa-minus'));
         if (!$('#guias i').hasClass('fa-minus')) {
@@ -126,6 +126,76 @@ $(document).ready(()=>{
 				console.log( "error" ,err);
 				$('#textGuia').text(err.responseJSON.message || err.responseJSON.error || 'error');
                 $('#bodyGuia').show('slow');
+				console.log( "status" ,status);
+			})
+			.always(function() {
+				console.log( "complete" );
+			});
+        }
+
+         
+    })
+    $('#archivos').click(e=>{
+        console.log($('#guias i').hasClass('fa-minus'));
+        if (!$('#guias i').hasClass('fa-minus')) {
+            
+			//e.preventDefault();
+			//queryparams
+			let searchParams = new URLSearchParams(window.location.search);        
+			//searchParams.has('sent') // true
+			let docente = searchParams.get('docente')
+			//console.log(docente);
+			//param id del curso
+			var idCurso = window.location.pathname.split( '/' )[2];
+			//console.log(idCurso);
+			//var config = require('./config');
+			$.ajax({
+				type: "Get",
+				url: "http://localhost:8000/api/guias?curso=" + idCurso +'&tipo=file',
+
+				cache: false,
+				dataType: "json",
+				//contentType: 'application/json; charset=utf-8',//multipart/form-data, or text/plain
+				headers:{
+					authorization: localStorage.getItem('authorization')||'bearer ',
+					
+				}
+			})            
+			.done(function(result) {
+				console.log( "success" ,result);
+
+				const t1 = '<tr><td>';
+				const t2 = '</td><td>';
+				const t3 =  '</td></tr>';
+				const a1 = '<a target="blank" href="http://localhost:8000/';
+				const a2 = '" type="button" class="btn btn-primary btn-sm"><i class="fas fa-info" ></i></a> ';
+				const a3 = '<a href="#" type="button" class="btn  btn-success btn-sm"><i class="fas fa-edit" ></i></a>';
+				let html = '';
+
+				let data = result.data;
+				//console.log(data);
+				
+				
+				for (let index = 0; index < data.length; index++) {
+					html = html+ t1 + data[index].numero + '</td><td class="desc">';
+					/* let contenido = data[index].contenidoHtml.split(/>/),texto = '';                            
+					for(let i = 0; i < 6; i++){
+					texto += contenido[i].split(/</)[0] + ' ';
+                    } */
+                    
+					html = html + data[index].contenidoHtml + t2;
+					
+					html = html + a1 + data[index].contenidoHtml + a2 + t3; 
+				}
+				
+				
+				$('#tableArc').fadeIn('slow');
+                $('#tArchivos').html(html).show('slow');
+			})
+			.fail(function(err,status) {
+				console.log( "error" ,err);
+				$('#textArc').text(err.responseJSON.message || err.responseJSON.error || 'error');
+                $('#bodyArc').show('slow');
 				console.log( "status" ,status);
 			})
 			.always(function() {

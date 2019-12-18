@@ -5,7 +5,7 @@ $(document).ready(()=>{
     //searchParams.has('sent') // true
     let idCurso = searchParams.get('curso');
     var idEstudiante = window.location.pathname.split( '/' )[2];
-    console.log(idEstudiante);
+    //console.log(idEstudiante);
     //var config = require('./config');
     $.ajax({
             type: "Get",
@@ -19,7 +19,7 @@ $(document).ready(()=>{
             }
         })            
         .done(function(result) {
-            console.log( "success" ,result);
+            //console.log( "success" ,result);
             let li1 = `<li class="list-group-item"><b>`;
             let li2 = `</b> <span class="pull-right">`
             let li3 = `</span></li>`;
@@ -50,14 +50,14 @@ $(document).ready(()=>{
             $('#b'+ idCurso + 'p').text(err.responseJSON.message || err.responseJSON.error || 'error');
             $('#b'+ idCurso).show('slow');
             console.log( "status" ,status);
-        })
+        })/* 
         .always(function() {
             console.log( "complete" );
-        });
+        }); */
         
-
+       
     $('.btnlab').click(e=>{
-        console.log($(e.currentTarget).children('i').hasClass('fa-minus'));
+        //console.log($(e.currentTarget).children('i').hasClass('fa-minus'));
         
        if (!$(e.currentTarget).children('i').hasClass('fa-minus')) {
 
@@ -66,10 +66,10 @@ $(document).ready(()=>{
         let docente = searchParams.get('docente');
 
         let idCurso = e.currentTarget.id;
-        console.log(e.currentTarget.id);
+        //console.log(e.currentTarget.id);
         //param id del curso
         var idEstudiante = window.location.pathname.split( '/' )[2];
-        console.log(idEstudiante);
+        //console.log(idEstudiante);
         //var config = require('./config');
        $.ajax({
                 type: "Get",
@@ -83,7 +83,7 @@ $(document).ready(()=>{
                 }
             })            
             .done(function(result) {
-                console.log( "success" ,result);
+                //console.log( "success" ,result);
                 
                 const t1 = '<tr><td>';
                 const t2 = '</td><td>';
@@ -91,6 +91,8 @@ $(document).ready(()=>{
                 const a1 = '<a href="/laboratorios/';
                 const a2 = '?docente='+ docente + '&tipo=rev&curso=' + idCurso+'"  type="button" class="btn btn-success btn-sm"><i class="fas fa-file-signature" ></i></a>';
                 const a3 = '?docente='+ docente + '&tipo=det&curso=' + idCurso+'" type="button" class="btn  btn-primary btn-sm"><i class="fas fa-info" ></i></a>';
+                const a4 = '?docente='+ docente + '&tipo=file&curso=' + idCurso+'" type="button" class="btn  btn-success  btn-sm"><i class="fas fa-file-signature " ></i></a>';
+                const a5 = '?docente='+ docente + '&tipo=filedet&curso=' + idCurso+'"  type="button" class="btn btn-primary btn-sm"><i class="fas fa-info" ></i></a>';
                 let html = '';
 
                 let data = result.labs;
@@ -99,10 +101,19 @@ $(document).ready(()=>{
                     html = html+ t1 + data[index].guia.numero + t2;
                     html = html + data[index].estado.toUpperCase() + t2;
                     html = html + data[index].nota + t2;
-                    if (data[index].estado != 'revisado') {
+
+                    if (data[index].estado != 'revisado' && data[index].guia.tipo == 'auto') {
                         html = html + a1 + data[index]._id + a2 ;
-                    }  
-                    html = html + a1 + data[index]._id + a3 
+                    }
+                    if (data[index].estado != 'revisado' && data[index].guia.tipo == 'file') {
+                        html = html + a1 + data[index]._id + a4 ;
+                    } 
+                    if (data[index].guia.tipo == 'auto') {
+                        html = html + a1 + data[index]._id + a3;
+                    }else{
+                        html = html + a1 + data[index]._id + a5;
+                    }   
+                     
                             
                     html = html + t3; 
 
@@ -116,18 +127,18 @@ $(document).ready(()=>{
                
                 $('#b'+ idCurso + 'p').text(err.responseJSON.message || err.responseJSON.error || 'error');
                 $('#b'+ idCurso).show('slow');
-              console.log( "status" ,status);
-            })
+              //console.log( "status" ,status);
+            })/* 
             .always(function() {
                 console.log( "complete" );
-            });
+            }); */
         }
 
          
     });
 
     
-    
+    $('.btnlab').click();
     
     
 

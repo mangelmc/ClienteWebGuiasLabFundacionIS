@@ -83,8 +83,17 @@
                         <input type="hidden" name="docente" id="docente">
                       </div>
                     </div>
-                    
                     <div class="form-group">
+                      <label for="tipo"  class="col-sm-2 control-label">tipo</label>
+                      <div class="col-sm-10">
+                        <select name="tipo" class="form-control" required id="stipog">
+                         <option value="auto">Normal</option>
+                         <option value="file">Con archivo Pdf</option>
+
+                        </select>
+                      </div>
+                    </div>
+                    <div class="form-group" id="contenido">
                       <label for="contenidoHtml" class="col-sm-2 control-label">contenidoHtml</label>
                       <div class="col-sm-10">
                         <textarea name="contenidoHtml" id="" class="form-control" required><h1>Titulo de Guia</h1><span>Descripcion de guia</span></textarea>
@@ -177,6 +186,7 @@
                         
                         
                         <td><%=data[i].fechaRegistro.substr(0,10)%></td>
+                        <%if(data[i].tipo == 'auto'){%>
                         <td>
                           <a href="#" type="button" id="<%=data[i]._id%>" class="btn btn-success btn-sm addPreg"  title="Agregar Pregunta" >
                             <i class="fas fa-plus" ></i>
@@ -185,6 +195,8 @@
                             <i class="fas fa-user-lock" ></i>
                           </a> -->
                         </td>
+                        
+                        <%}%>
                       </tr>   
                       <%}%>
                                                  
@@ -211,7 +223,7 @@
               <div class="modal-body">
 
                 <!-- form start -->
-                <form role="form" id="formPregunta" method="POST" class="form-horizontal">
+                <form role="form" id="formPregunta" method="POST" class="form-horizontal" enctype="multipart/form-data">
                   <div class="box-body col-sm-12">
                     <div class="form-group">
                       <label for="tipo"  class="col-sm-2 control-label">tipo</label>
@@ -320,6 +332,25 @@
         $('#input').val(select);
       }
     })
+
+    let contenido =`<label for="contenidoHtml" class="col-sm-2 control-label">contenidoHtml</label>
+                    <div class="col-sm-10">
+                      <textarea name="contenidoHtml" id="" class="form-control" required><h1>Titulo de Guia</h1><span>Descripcion de guia</span></textarea>
+                    </div>`;
+    let file = `<label for="file" class="col-sm-2 control-label">Pdf</label>
+                <div class="col-sm-10">
+                  <input type="file" name="file" id="file" class="form-control" required>
+                </div>`;              
+    $('#stipog').change((e)=>{
+      if ($('#stipog').val() == 'auto') {
+        console.log('auo');
+        $('#contenido').html(contenido);
+      }else{
+        $('#contenido').html(file);
+      }
+    })
+
+
   </script>
 
 

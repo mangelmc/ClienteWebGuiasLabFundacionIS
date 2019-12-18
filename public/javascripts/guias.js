@@ -64,12 +64,16 @@ $(document).ready(()=>{
     $('#formGuia').submit(e=>{
         e.preventDefault();
         let form,obj = {};
+
         form = new FormData(e.target);
         form.forEach((value,key)=>{
             obj[key] = value;
         })
-       
-       $.ajax({
+        console.log(obj);
+        console.log(form.get('file'));
+        if (form.get('file') === null) {
+            console.log('html');
+            $.ajax({
                 type: "post",
                 url: "http://localhost:8000/api/guias",
                 data: obj,
@@ -103,6 +107,47 @@ $(document).ready(()=>{
                 },4000);
                 console.log( "status" ,status);
             })
+        }else{
+            $.ajax({
+                type: "post",
+                url: "http://localhost:8000/api/guias/file",
+                
+                dataType: "html",
+                data: form,
+                cache: false,
+                contentType: false,
+                processData: false,
+                //contentType: 'application/json; charset=utf-8',//multipart/form-data, or text/plain
+                headers:{
+                    authorization: localStorage.getItem('authorization')||'bearer ',
+                    
+                }
+            })            
+            .done(function(result) {
+                console.log( "success" ,result);
+                $('#alertOkText').text(result.message || 'Peticion correcta');
+                $('#alertOk').slideDown();
+                setTimeout(()=>{
+                    $('#alertOk').slideUp();
+                    location.reload();
+                },4000);
+                
+                
+               
+            })
+            .fail(function(err,status) {
+                console.log( "error" ,err);
+                $('#alertErrorText').text(err.responseJSON.message || err.responseJSON.error || 'Error inesperado');
+                $('#alertError').slideDown();
+                setTimeout(()=>{
+                    $('#alertError').slideUp();
+                    
+                },4000);
+                console.log( "status" ,status);
+            })
+        }
+       
+       
 
     })
 

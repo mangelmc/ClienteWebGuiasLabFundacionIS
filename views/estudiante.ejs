@@ -113,7 +113,7 @@
               for(var i = 0,len = data.length; i < len;i++){%>
              
                 
-              <div class="box box-primary box-solid collapsed-box">
+              <div class="box box-primary box-solid ">
                 <div class="box-header with-border">
                   
                   <h2 class="box-title text-bold ">
@@ -121,7 +121,7 @@
                      Laboratorios <%=data[i].curso.materia.nombre%> <%=data[i].curso.materia.sigla%> <%=data[i].curso.gestion%> G<%=data[i].curso.grupo%>
                     </h2>
     
-                  <div class="box-tools pull-right">                  
+                  <div class="box-tools pull-right " style="display: none;">                  
                     <button type="button" id="<%=data[i].curso._id%>" class="btn btn-box-tool btnlab" data-widget="collapse"><i class="fa fa-plus"></i>
                     </button>
                   </div>            
