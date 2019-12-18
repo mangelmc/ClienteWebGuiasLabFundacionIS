@@ -43,7 +43,8 @@ $(document).ready(()=>{
                 for (let index = 0; index < data.length; index++) {
                   html = html+ t1 + data[index].estudiante.nombre + t2;
                   html = html + data[index].estudiante.ci + t2;
-                  html = html + data[index].estudiante.rud + t2;  
+                  html = html + data[index].estudiante.rud + '</td><td class="esta" id='+ data[index].estudiante._id+' >';
+                  html = html + t2 + t2 + t2 + t2; 
                   html = html + a1 + data[index].estudiante._id + a2 + t3; 
                 }
                 $('#tableEst').fadeIn('slow');
@@ -65,6 +66,67 @@ $(document).ready(()=>{
          
     });
     $('#estudiantes').click();
+
+    setTimeout(()=>{
+      $('.esta').each(function(){
+        console.log($(this).attr('id'));
+        //let searchParams = new URLSearchParams(window.location.search);        
+    //searchParams.has('sent') // true
+    var idCurso = window.location.pathname.split( '/' )[2];
+    var idEstudiante = $(this).attr('id');
+    //console.log(idCurso);
+    var este = $(this);
+    //var config = require('./config');
+    $.ajax({
+            type: "Get",
+            url: "http://localhost:8000/api/laboratorios/estadistica/" + idEstudiante +"?curso=" + idCurso,
+            
+            cache: false,
+            dataType: "json",
+            headers:{
+                authorization: localStorage.getItem('authorization')||'bearer ',
+                
+            }
+        })            
+        .done(function(result) {
+            //console.log( "success" ,result);
+            /* let li1 = `<li class="list-group-item"><b>`;
+            let li2 = `</b> <span class="pull-right">`
+            let li3 = `</span></li>`; */
+            let rev = 0,pen= 0;
+            let data = result.labs;
+            //console.log(data);
+            for (let index = 0; index < data.length; index++) {
+                if (data[index].estado=='revisado') {
+                    rev++ 
+                }
+                if (data[index].estado=='pendiente') {
+                    pen++
+                }
+            }
+            /* let html = li1 + 'Laboratorios Revisados ' + li2 + rev +li3;
+            html += li1 + 'Laboratorios por Revisar ' + li2 + pen +li3;
+            html += li1 + 'Total Laboratorios realizados ' + li2 + data.length +li3;
+            html += li1 + 'Total Guias Curso ' + li2 + result.guias +li3; */
+            console.log(rev,pen,data.length,result.guias);
+            este.text(rev);
+            este.next().text(pen);
+            este.next().next().text(data.length);
+            este.next().next().next().text(result.guias);
+
+        
+            //$('#lista').append(html);
+            //$('#t' + idCurso).html(html).show('slow');
+            
+        })
+        .fail(function(err,status) {
+            console.log( "error" ,err);            
+            console.log( "status" ,status);
+        })
+
+    });
+    },2000)
+
     $('#guias').click(e=>{
         console.log($('#guias i').hasClass('fa-minus'));
         if (!$('#guias i').hasClass('fa-minus')) {
