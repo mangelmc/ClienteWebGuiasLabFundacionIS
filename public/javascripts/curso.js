@@ -70,7 +70,7 @@ $(document).ready(()=>{
     let setStats = ()=>{
         setTimeout(()=>{
             $('.esta').each(function(){
-              console.log($(this).attr('id'));
+              //console.log($(this).attr('id'));
               //let searchParams = new URLSearchParams(window.location.search);        
               //searchParams.has('sent') // true
               var idCurso = window.location.pathname.split( '/' )[2];
@@ -115,7 +115,7 @@ $(document).ready(()=>{
                   })
       
               });
-          },2000)
+          },1500)
     }
     
     setStats();
@@ -167,8 +167,7 @@ $(document).ready(()=>{
 					for(let i = 0; i < 6; i++){
 					texto += contenido[i].split(/</)[0] + ' ';
                     } */
-                    let texto = 'Descripcion de guia'
-					html = html + texto + t2;
+                    
 					html = html + data[index].fechaRegistro.substr(0,10) + t2;  
 					html = html + a1 + data[index]._id + a2 + data[index].tipo+ a25 + t3; 
 				}

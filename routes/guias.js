@@ -35,7 +35,7 @@ router.get('/:id', function(req, res, next) {
     })
     .then(result => {
       
-      console.log('result', result);
+      //console.log('result', result);
       if (req.query.tipo === 'auto') {
         return res.render('detalleGuia', { title: 'Detalle Guia' ,result:result,query:req.query});
       }

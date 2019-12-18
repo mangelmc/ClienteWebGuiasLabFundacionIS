@@ -101,7 +101,7 @@
                     <thead>
                     <tr>
                         <th>N° GUIA </th>
-                        <th>DESCRIPION</th>
+                        
                         <th>FECHA</th>
                         <th>CURSO</th>
                         <th>ACCIONES</th>
@@ -114,10 +114,7 @@
                       for(var i = 0,len = data.length; i < len;i++){%>
                       <tr>
                         <td class="desc"><%=data[i].numero%></td>
-                        <td class="desc">
-                            
-                          Descripcion de guia
-                        </td>
+                        
                         <td><%=data[i].fechaRegistro.substr(0,10)%>%></td>
                         <td><%=data[i].curso.materia.sigla%> G<%=data[i].curso.grupo%></td>
                         <td>
@@ -125,9 +122,9 @@
                           <a href="/guias/<%=data[i]._id%>?docente=<%= query.docente%>&tipo=<%=data[i].tipo%>" type="button" class="btn  btn-success  btn-sm" title="Mas info">
                             <i class="fas fa-info" ></i>
                           </a>
-                          <a href="#" type="button" class="btn  btn-primary btn-sm">
+                          <!-- <a href="#" type="button" class="btn  btn-primary btn-sm">
                             <i class="fas fa-edit" ></i>
-                          </a>                          
+                          </a>   -->                        
                         </td>
                       </tr>   
                       <%}%>
